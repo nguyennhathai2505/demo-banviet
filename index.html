@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công ty TNHH Công Nghệ Giáo Dục Bản Việt</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            main: '#5cb4e3',     /* Màu nền, màu chủ đạo */
+                            text: '#002f53',     /* Màu của chữ */
+                            hover: '#f7d139',    /* Màu phụ, hover */
+                            dark: '#001d35',     /* Màu tối bổ trợ */
+                            light: '#eef8fc'     /* Màu nền nhạt */
+                        }
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                            '50%': { opacity: '0.8', transform: 'scale(1.08)' }
+                        },
+                        floatSlow: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    },
+                    animation: {
+                        marquee: 'marquee 22s linear infinite',
+                        'pulse-glow': 'pulseGlow 6s ease-in-out infinite',
+                        'float-slow': 'floatSlow 4s ease-in-out infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Inter & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #002f53;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glass-dark {
+            background: rgba(0, 47, 83, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #eef8fc;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #5cb4e3;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #002f53;
+        }
+    </style>
+</head>
+<body class="bg-white text-brand-text flex flex-col min-h-screen">
+
+    <!-- HEADER SECTION -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-brand-main/20 shadow-sm transition-all duration-300 rounded-b-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- LOGO CÔNG TY -->
+            <a href="#" class="flex items-center group py-2">
+                <img id="header-logo-img" 
+                     src="logo-banviet.png" 
+                     alt="Logo Công Ty TNHH Công Nghệ Giáo Dục Bản Việt" 
+                     class="h-14 sm:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
+            </a>
+
+            <!-- NAVIGATION MENU -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                <a href="#about" class="px-4 py-2 text-sm lg:text-base font-bold text-brand-text hover:text-brand-text hover:bg-brand-hover/20 rounded-lg transition-colors">
+                    Về Chúng Tôi
+                </a>
+
+                <!-- DROPDOWN THƯƠNG HIỆU -->
+                <div class="relative group">
+                    <button class="px-4 py-2 text-sm lg:text-base font-bold text-brand-text hover:text-brand-text hover:bg-brand-hover/20 rounded-lg transition-colors inline-flex items-center gap-1.5">
+                        Thương Hiệu
+                        <svg class="w-4 h-4 text-brand-text transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <div class="absolute left-0 mt-1 w-64 bg-white rounded-2xl shadow-xl border border-brand-main/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-1 p-2 z-50">
+                        <a href="#brand-danhlingo" class="flex items-center gap-3 p-3 rounded-xl hover:bg-brand-main/10 transition-colors group/item">
+                            <div class="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 font-extrabold group-hover/item:scale-110 transition-transform">D</div>
+                            <div>
+                                <div class="font-bold text-brand-text text-sm">Danhlingo</div>
+                                <div class="text-xs text-gray-500">Ngoại ngữ & Du học</div>
+                            </div>
+                        </a>
+                        <a href="#brand-diem10cong" class="flex items-center gap-3 p-3 rounded-xl hover:bg-brand-main/10 transition-colors group/item">
+                            <div class="w-9 h-9 rounded-lg bg-yellow-100 flex items-center justify-center text-yellow-700 font-extrabold group-hover/item:scale-110 transition-transform">10+</div>
+                            <div>
+                                <div class="font-bold text-brand-text text-sm">Diem10cong</div>
+                                <div class="text-xs text-gray-500">Luyện thi Phổ thông</div>
+                            </div>
+                        </a>
+                        <a href="#brand-aitechco" class="flex items-center gap-3 p-3 rounded-xl hover:bg-brand-main/10 transition-colors group/item">
+                            <div class="w-9 h-9 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600 font-extrabold group-hover/item:scale-110 transition-transform">AI</div>
+                            <div>
+                                <div class="font-bold text-brand-text text-sm">Aitechco</div>
+                                <div class="text-xs text-gray-500">Giải pháp AI Giáo dục</div>
+                            </div>
+                        </a>
+                        <a href="#brand-schooli" class="flex items-center gap-3 p-3 rounded-xl hover:bg-brand-main/10 transition-colors group/item">
+                            <div class="w-9 h-9 rounded-lg bg-teal-100 flex items-center justify-center text-teal-600 font-extrabold group-hover/item:scale-110 transition-transform">S</div>
+                            <div>
+                                <div class="font-bold text-brand-text text-sm">Schooli</div>
+                                <div class="text-xs text-gray-500">Quản lý Trường học 4.0</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="#news" class="px-4 py-2 text-sm lg:text-base font-bold text-brand-text hover:text-brand-text hover:bg-brand-hover/20 rounded-lg transition-colors">
+                    Tin Tức
+                </a>
+                <a href="#careers" class="px-4 py-2 text-sm lg:text-base font-bold text-brand-text hover:text-brand-text hover:bg-brand-hover/20 rounded-lg transition-colors">
+                    Tuyển Dụng
+                </a>
+            </nav>
+
+            <div class="hidden lg:flex items-center">
+                <a href="#contact" class="px-5 py-2.5 bg-brand-hover hover:bg-yellow-400 text-brand-text font-extrabold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                    Liên Hệ Ngay
+                </a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-brand-text hover:bg-brand-main/10">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-brand-main/20 px-4 pt-2 pb-6 space-y-2">
+            <a href="#about" class="block px-3 py-2 text-base font-bold text-brand-text rounded-lg hover:bg-brand-main/10">Về Chúng Tôi</a>
+            <div class="pl-3 py-1 space-y-1 border-l-2 border-brand-main/30 ml-2">
+                <span class="text-xs uppercase font-extrabold text-gray-400 block px-2">Các Thương Hiệu Con</span>
+                <a href="#brand-danhlingo" class="block px-2 py-1.5 text-sm font-semibold text-brand-text hover:text-brand-hover">1. Danhlingo</a>
+                <a href="#brand-diem10cong" class="block px-2 py-1.5 text-sm font-semibold text-brand-text hover:text-brand-hover">2. Diem10cong</a>
+                <a href="#brand-aitechco" class="block px-2 py-1.5 text-sm font-semibold text-brand-text hover:text-brand-hover">3. Aitechco</a>
+                <a href="#brand-schooli" class="block px-2 py-1.5 text-sm font-semibold text-brand-text hover:text-brand-hover">4. Schooli</a>
+            </div>
+            <a href="#news" class="block px-3 py-2 text-base font-bold text-brand-text rounded-lg hover:bg-brand-main/10">Tin Tức</a>
+            <a href="#careers" class="block px-3 py-2 text-base font-bold text-brand-text rounded-lg hover:bg-brand-main/10">Tuyển Dụng</a>
+        </div>
+    </header>
+
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-[88vh] flex items-center justify-center overflow-hidden bg-brand-dark py-16 lg:py-24">
+        
+        <div class="absolute inset-0 z-0">
+            <img id="hero-bg-img" 
+                 src="anh_doi_ngu.png" 
+                 alt="Đội ngũ TNHH Công Nghệ Giáo Dục Bản Việt" 
+                 class="w-full h-full object-cover object-center scale-105 transition-all duration-700 filter brightness-[0.75] contrast-[1.1]" />
+        </div>
+
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-text/95 via-brand-text/80 to-brand-main/60 z-10 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-text via-transparent to-transparent z-10 opacity-90"></div>
+        
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-hover/30 rounded-full blur-[140px] z-10 pointer-events-none animate-pulse-glow"></div>
+        <div class="absolute bottom-10 left-10 w-80 h-80 bg-brand-main/40 rounded-full blur-[100px] z-10 pointer-events-none"></div>
+
+        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-hover/20 backdrop-blur-md border border-brand-hover/40 text-brand-hover font-bold text-xs sm:text-sm tracking-wider uppercase">
+                        <span class="w-2 h-2 rounded-full bg-brand-hover animate-ping"></span>
+                        Tiên Phong Công Nghệ Giáo Dục 4.0
+                    </div>
+
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight">
+                        CÔNG TY TNHH CÔNG NGHỆ <br class="hidden sm:inline"/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-main via-blue-200 to-brand-hover">
+                            GIÁO DỤC <br> BẢN VIỆT
+                        </span>
+                    </h1>
+
+                    <p class="text-base sm:text-xl text-blue-100 max-w-2xl font-medium leading-relaxed">
+                        Kiến tạo hệ sinh thái tri thức số thông minh với 4 thương hiệu chuyên biệt. Đội ngũ Bản Việt cam kết mang lại trải nghiệm học tập hiện đại, đột phá cho thế hệ tương lai.
+                    </p>
+
+                    <div class="pt-4 grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-xl">
+                        <div class="glass-dark p-4 rounded-2xl border border-white/10 text-left">
+                            <div class="text-2xl sm:text-3xl font-black text-brand-hover">4+</div>
+                            <div class="text-xs text-blue-200 font-semibold mt-1">Thương Hiệu Con</div>
+                        </div>
+                        <div class="glass-dark p-4 rounded-2xl border border-white/10 text-left">
+                            <div class="text-2xl sm:text-3xl font-black text-brand-main">100K+</div>
+                            <div class="text-xs text-blue-200 font-semibold mt-1">Học Sinh & Sinh Viên</div>
+                        </div>
+                        <div class="glass-dark p-4 rounded-2xl border border-white/10 text-left col-span-2 sm:col-span-1">
+                            <div class="text-2xl sm:text-3xl font-black text-white">50+</div>
+                            <div class="text-xs text-blue-200 font-semibold mt-1">Chuyên Gia Đội Ngũ</div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 flex flex-wrap gap-4 justify-center lg:justify-start">
+                        <a href="#brands" class="px-8 py-4 bg-brand-hover hover:bg-yellow-400 text-brand-text font-black text-base rounded-2xl shadow-xl hover:shadow-brand-hover/40 transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2">
+                            Khám Phá Hệ Sinh Thái
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                        <a href="#about" class="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 font-bold text-base rounded-2xl transition-all duration-300">
+                            Về Chúng Tôi
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 hidden lg:block">
+                    <!-- <div class="glass-dark p-6 rounded-3xl border border-white/20 shadow-2xl space-y-4 animate-float-slow">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 rounded-full bg-green-400 animate-ping"></div>
+                                <span class="text-xs font-bold text-blue-200 uppercase tracking-widest">Đội Ngũ Nhân Sự</span>
+                            </div>
+                            <span class="text-xs bg-brand-main/30 text-brand-main font-bold px-2.5 py-1 rounded-full">Bản Việt EdTech</span>
+                        </div>
+                        <p class="text-xs text-blue-100 italic leading-relaxed">
+                            "Đội ngũ chuyên gia công nghệ & cố vấn giáo dục tâm huyết luôn sẵn sàng đồng hành cùng thế hệ trẻ Việt Nam."
+                        </p>
+                        <div class="flex items-center gap-3 pt-2">
+                            <div class="flex -space-x-3">
+                                <img class="w-10 h-10 rounded-full border-2 border-brand-main object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&fit=crop" alt="Team member">
+                                <img class="w-10 h-10 rounded-full border-2 border-brand-main object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&fit=crop" alt="Team member">
+                                <img class="w-10 h-10 rounded-full border-2 border-brand-main object-cover" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&fit=crop" alt="Team member">
+                            </div>
+                            <div class="text-xs text-white font-bold">+47 thành viên xuất sắc</div>
+                        </div>
+                    </div> -->
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SECTION 4 THƯƠNG HIỆU CON (HÌNH TRÒN TRUNG TÂM CHO PHÉP UPLOAD ẢNH NỀN) -->
+    <section id="brands" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full bg-brand-main/15 text-brand-text">
+                    Hệ Sinh Thái Bản Việt
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-brand-text">
+                    4 Thương Hiệu Trực Thuộc
+                </h2>
+                <p class="text-sm sm:text-base text-gray-600 font-medium">
+                    Mỗi thương hiệu đóng vai trò như một trụ cột vững chắc, đáp ứng toàn diện nhu cầu giáo dục và ứng dụng công nghệ hàng đầu.
+                </p>
+            </div>
+
+            <!-- BỐ CỤC 4 Ô VUÔNG ĐÈ LÊN HÌNH TRÒN TRUNG TÂM -->
+            <div class="relative max-w-5xl mx-auto min-h-[680px] lg:min-h-[720px] flex items-center justify-center">
+                
+                <!-- Background Hình Tròn Có Thể Tùy Chọn Upload Ảnh Phía Sau -->
+                <div class="absolute w-[320px] h-[320px] sm:w-[440px] sm:h-[440px] rounded-full bg-gradient-to-tr from-brand-main via-brand-hover to-blue-400 p-1.5 shadow-2xl flex items-center justify-center transform hover:scale-105 transition-transform duration-700 z-0 overflow-hidden">
+                    
+                    <!-- Ảnh nền hình tròn (Tùy chỉnh upload) -->
+                    <img id="circle-bg-img" 
+                         src="anh-dia-cau.png" 
+                         alt="Background Hình Tròn Hệ Sinh Thái" 
+                         class="absolute inset-0 w-full h-full object-cover rounded-full filter contrast-105" />
+                    
+                    <!-- Lớp phủ Glassmorphism nhạt để hiển thị text thương hiệu Bản Việt nổi bật trên ảnh -->
+                    <!-- <div class="relative z-10 w-4/5 h-4/5 rounded-full bg-white/80 backdrop-blur-md flex flex-col items-center justify-center text-center p-6 border-2 border-white/90 shadow-lg">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-main flex items-center justify-center text-brand-text font-black text-2xl mb-2 shadow-md">
+                            BV
+                        </div>
+                        <span class="font-black text-brand-text text-base sm:text-lg">BẢN VIỆT</span>
+                        <span class="text-[11px] text-gray-600 font-bold uppercase tracking-wider">Hệ Sinh Thái Số</span>
+                    </div> -->
+                </div>
+
+                <!-- LƯỚI 4 Ô VUÔNG TẠI 4 GÓC -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 w-full relative z-10">
+                    
+                    <!-- THƯƠNG HIỆU 1: DANHLINGO -->
+                    <div id="brand-danhlingo" class="bg-white/95 backdrop-blur-sm p-8 rounded-3xl border-2 border-brand-main/20 shadow-xl hover:shadow-2xl hover:border-brand-hover transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between min-h-[280px]">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <img id="logo-danhlingo" src="danhlingo-logo.png" alt="Logo Danhlingo" class="h-10 w-auto object-contain" />
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-full">Ngoại Ngữ</span>
+                            </div>
+                            <h3 class="text-xl font-extrabold text-brand-text mb-2">Danhlingo</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                Nền tảng học ngoại ngữ & luyện thi chứng chỉ quốc tế trực tuyến thông minh, ứng dụng phương pháp phản xạ hiện đại.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-brand-main">
+                            <span>Khóa học Online & Hybrid</span>
+                            <span class="text-brand-hover font-black">→</span>
+                        </div>
+                    </div>
+
+                    <!-- THƯƠNG HIỆU 2: DIEM10CONG -->
+                    <div id="brand-diem10cong" class="bg-white/95 backdrop-blur-sm p-8 rounded-3xl border-2 border-brand-main/20 shadow-xl hover:shadow-2xl hover:border-brand-hover transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between min-h-[280px]">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <img id="logo-diem10cong" src="diem10cong-logo.png" alt="Logo Diem10cong" class="h-10 w-auto object-contain" />
+                                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-bold rounded-full">Phổ Thông</span>
+                            </div>
+                            <h3 class="text-xl font-extrabold text-brand-text mb-2">Diem10cong</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                Giải pháp luyện thi & bồi dưỡng kiến thức K-12 toàn diện, củng cố nền tảng Toán - Lý - Hóa - Văn bứt phá điểm số.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-brand-main">
+                            <span>Luyện Thi Chất Lượng Cao</span>
+                            <span class="text-brand-hover font-black">→</span>
+                        </div>
+                    </div>
+
+                    <!-- THƯƠNG HIỆU 3: AITECHCO -->
+                    <div id="brand-aitechco" class="bg-white/95 backdrop-blur-sm p-8 rounded-3xl border-2 border-brand-main/20 shadow-xl hover:shadow-2xl hover:border-brand-hover transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between min-h-[280px]">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <img id="logo-aitechco" src="aitechco-logo.png" alt="Logo Aitechco" class="h-10 w-auto object-contain" />
+                                <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-bold rounded-full">Trí Tuệ Nhân Tạo</span>
+                            </div>
+                            <h3 class="text-xl font-extrabold text-brand-text mb-2">Aitechco</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                Nghiên cứu và phát triển phần mềm AI, trợ lý học tập tự động và công cụ chuyển đổi số cho nhà trường.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-brand-main">
+                            <span>Công Nghệ AI Tiên Tiến</span>
+                            <span class="text-brand-hover font-black">→</span>
+                        </div>
+                    </div>
+
+                    <!-- THƯƠNG HIỆU 4: SCHOOLI -->
+                    <div id="brand-schooli" class="bg-white/95 backdrop-blur-sm p-8 rounded-3xl border-2 border-brand-main/20 shadow-xl hover:shadow-2xl hover:border-brand-hover transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between min-h-[280px]">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <img id="logo-schooli" src="schooli-logo.png" alt="Logo Schooli" class="h-10 w-auto object-contain" />
+                                <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-bold rounded-full">Quản Lý EdTech</span>
+                            </div>
+                            <h3 class="text-xl font-extrabold text-brand-text mb-2">Schooli</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                Hệ thống quản lý trường học, trung tâm đào tạo thông minh: Quản lý học viên, lịch học và học phí trên 1 nền tảng.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-brand-main">
+                            <span>Phần Mềm SaaS Giáo Dục</span>
+                            <span class="text-brand-hover font-black">→</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- SECTION ĐỐI TÁC -->
+    <section class="py-16 bg-brand-text text-white overflow-hidden relative border-y border-brand-main/20">
+        <div class="max-w-7xl mx-auto px-4 mb-8 text-center">
+            <h3 class="text-sm font-extrabold uppercase tracking-widest text-brand-hover">
+                Đối Tác Chiến Lược & Đơn Vị Đồng Hành
+            </h3>
+        </div>
+
+        <div class="flex overflow-hidden select-none relative w-full">
+            <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-brand-text to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-brand-text to-transparent z-10 pointer-events-none"></div>
+
+            <div class="flex items-center gap-12 sm:gap-16 shrink-0 animate-marquee marquee-track py-2 pr-12">
+                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">ĐẠI HỌC CÔNG NGHIỆP</div>
+                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">VIETTEL EDUTECH</div>
+                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">VNPT EDUCATION</div>
+                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">FPT POLYTECHNIC</div>
+                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">MICROSOFT EDUCATION</div>
+                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">AWS FOR EDUCATION</div>
+            </div>
+
+            <div class="flex items-center gap-12 sm:gap-16 shrink-0 animate-marquee marquee-track py-2 pr-12" aria-hidden="true">
+                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">ĐẠI HỌC CÔNG NGHIỆP</div>
+                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">VIETTEL EDUTECH</div>
+                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">VNPT EDUCATION</div>
+                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">FPT POLYTECHNIC</div>
+                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">MICROSOFT EDUCATION</div>
+                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">AWS FOR EDUCATION</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SECTION VỀ CHÚNG TÔI -->
+    <section id="about" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-xs font-black uppercase tracking-widest text-brand-main bg-brand-main/10 px-3.5 py-1.5 rounded-full">
+                        Tầm Nhìn & Sứ Mệnh
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-brand-text">
+                        Nâng Tầm Giáo Dục Việt Bằng Sức Mạnh Công Nghệ
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed font-medium">
+                        Công ty TNHH Công Nghệ Giáo Dục Bản Việt ra đời với mong muốn rút ngắn khoảng cách công nghệ trong dạy và học, mang đến giải pháp toàn diện cho học sinh, giáo viên và các cơ sở giáo dục trên toàn quốc.
+                    </p>
+                    <div class="space-y-3 pt-2">
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-brand-hover flex items-center justify-center text-brand-text font-black text-xs shrink-0 mt-0.5">✓</div>
+                            <p class="text-sm font-semibold text-brand-text">Nghiên cứu ứng dụng công nghệ AI cá nhân hóa lộ trình học tập.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-brand-hover flex items-center justify-center text-brand-text font-black text-xs shrink-0 mt-0.5">✓</div>
+                            <p class="text-sm font-semibold text-brand-text">Số hóa toàn bộ quy trình vận hành và quản lý giáo dục.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-brand-hover flex items-center justify-center text-brand-text font-black text-xs shrink-0 mt-0.5">✓</div>
+                            <p class="text-sm font-semibold text-brand-text">Kết nối cộng đồng tri thức và hệ sinh thái đào tạo chất lượng cao.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="w-full h-80 sm:h-96 rounded-3xl bg-brand-main/20 p-4 border-2 border-brand-main/30 shadow-xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80" alt="Văn phòng Bản Việt EdTech" class="w-full h-full object-cover rounded-2xl" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- BẢNG ĐIỀU KHIỂN UPLOAD ẢNH (BỔ SUNG NÚT UPLOAD HÌNH TRÒN TRUNG TÂM) -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button id="toggle-upload-panel" class="bg-brand-hover hover:bg-yellow-400 text-brand-text font-black px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2 border-2 border-brand-text transition-transform duration-300 transform hover:scale-105">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 002-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            Tải Ảnh Của Bạn
+        </button>
+
+        <div id="upload-panel" class="hidden absolute bottom-16 right-0 w-80 sm:w-96 bg-white p-6 rounded-3xl shadow-2xl border-2 border-brand-main z-50 text-left space-y-4 max-h-[80vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b pb-3">
+                <h4 class="font-extrabold text-brand-text text-base">Cung Cấp Hình Ảnh Của Bạn</h4>
+                <button id="close-upload-panel" class="text-gray-400 hover:text-red-500 font-bold">✕</button>
+            </div>
+            
+            <!-- Upload Ảnh Đội Ngũ Hero Background -->
+            <div class="space-y-1">
+                <label class="text-xs font-bold text-brand-text block">1. Ảnh Đội Ngũ Công Ty (Hero BG)</label>
+                <input type="file" id="input-hero-bg" accept="image/*" class="text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-brand-main file:text-brand-text font-bold hover:file:bg-brand-hover cursor-pointer w-full" />
+            </div>
+
+            <!-- Upload Logo Công Ty Header -->
+            <div class="space-y-1">
+                <label class="text-xs font-bold text-brand-text block">2. Logo Công Ty Bản Việt (Header)</label>
+                <input type="file" id="input-header-logo" accept="image/*" class="text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-brand-main file:text-brand-text font-bold hover:file:bg-brand-hover cursor-pointer w-full" />
+            </div>
+
+            <!-- Upload Ảnh Nền Hình Tròn Trung Tâm giữa 4 thương hiệu con -->
+            <div class="space-y-1 bg-brand-main/10 p-3 rounded-2xl border border-brand-main/30">
+                <label class="text-xs font-extrabold text-brand-text block">3. Ảnh Nền Hình Tròn Phía Sau 4 Thương Hiệu</label>
+                <input type="file" id="input-circle-bg" accept="image/*" class="text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-brand-hover file:text-brand-text font-bold hover:file:bg-yellow-400 cursor-pointer w-full" />
+            </div>
+
+            <hr class="border-gray-100"/>
+            <span class="text-xs font-black text-gray-400 block uppercase">4. Logo 4 Thương Hiệu Con</span>
+
+            <div class="grid grid-cols-2 gap-2 text-xs">
+                <div>
+                    <label class="font-bold text-gray-700">Danhlingo</label>
+                    <input type="file" id="input-logo-danhlingo" accept="image/*" class="w-full text-[10px]" />
+                </div>
+                <div>
+                    <label class="font-bold text-gray-700">Diem10cong</label>
+                    <input type="file" id="input-logo-diem10cong" accept="image/*" class="w-full text-[10px]" />
+                </div>
+                <div>
+                    <label class="font-bold text-gray-700">Aitechco</label>
+                    <input type="file" id="input-logo-aitechco" accept="image/*" class="w-full text-[10px]" />
+                </div>
+                <div>
+                    <label class="font-bold text-gray-700">Schooli</label>
+                    <input type="file" id="input-logo-schooli" accept="image/*" class="w-full text-[10px]" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- FOOTER CÔNG TY -->
+    <footer id="contact" class="bg-brand-dark text-white pt-16 pb-8 mt-auto border-t border-brand-main/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+            
+            <div class="space-y-4">
+                <div class="font-black text-xl text-brand-main">CÔNG TY TNHH CÔNG NGHỆ GIÁO DỤC BẢN VIỆT</div>
+                <p class="text-xs text-blue-200 leading-relaxed">
+                    Đồng hành cùng sự phát triển của giáo dục Việt Nam thông qua đổi mới sáng tạo công nghệ.
+                </p>
+            </div>
+
+            <div class="space-y-3">
+                <div class="font-bold text-sm text-brand-hover uppercase tracking-wider">Thương Hiệu Con</div>
+                <ul class="space-y-2 text-xs text-blue-100 font-medium">
+                    <li><a href="#brand-danhlingo" class="hover:text-brand-hover">Danhlingo</a></li>
+                    <li><a href="#brand-diem10cong" class="hover:text-brand-hover">Diem10cong</a></li>
+                    <li><a href="#brand-aitechco" class="hover:text-brand-hover">Aitechco</a></li>
+                    <li><a href="#brand-schooli" class="hover:text-brand-hover">Schooli</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-3">
+                <div class="font-bold text-sm text-brand-hover uppercase tracking-wider">Liên Hệ</div>
+                <p class="text-xs text-blue-100">
+                    <strong>Email:</strong> contact@banviet.edu.vn<br>
+                    <strong>Hotline:</strong> 0973 075 715<br>
+                    <strong>Địa chỉ:</strong> TP. Hồ Chí Minh, Việt Nam
+                </p>
+            </div>
+
+            <div class="space-y-3">
+                <div class="font-bold text-sm text-brand-hover uppercase tracking-wider">Nhận Thông Tin</div>
+                <div class="flex gap-2">
+                    <input type="email" placeholder="Email của bạn..." class="px-3 py-2 text-xs rounded-xl bg-white/10 border border-white/20 text-white focus:outline-none w-full" />
+                    <button class="bg-brand-hover text-brand-text font-bold px-3 py-2 rounded-xl text-xs hover:bg-yellow-400">Gửi</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 text-center text-xs text-blue-300">
+            © 2026 CÔNG TY TNHH CÔNG NGHỆ GIÁO DỤC BẢN VIỆT. All rights reserved.
+        </div>
+    </footer>
+
+
+    <!-- JAVASCRIPT XỬ LÝ UPLOAD ẢNH -->
+    <script>
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        const toggleUploadBtn = document.getElementById('toggle-upload-panel');
+        const closeUploadBtn = document.getElementById('close-upload-panel');
+        const uploadPanel = document.getElementById('upload-panel');
+
+        toggleUploadBtn.addEventListener('click', () => {
+            uploadPanel.classList.toggle('hidden');
+        });
+        closeUploadBtn.addEventListener('click', () => {
+            uploadPanel.classList.add('hidden');
+        });
+
+        function handleImageUpload(inputId, targetImgId) {
+            const input = document.getElementById(inputId);
+            const img = document.getElementById(targetImgId);
+
+            if (input && img) {
+                input.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            img.src = event.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        }
+
+        // Đăng ký sự kiện upload bao gồm cả ảnh nền hình tròn trung tâm
+        handleImageUpload('input-hero-bg', 'hero-bg-img');
+        handleImageUpload('input-header-logo', 'header-logo-img');
+        handleImageUpload('input-circle-bg', 'circle-bg-img'); // Thêm Upload Ảnh Hình Tròn
+        handleImageUpload('input-logo-danhlingo', 'logo-danhlingo');
+        handleImageUpload('input-logo-diem10cong', 'logo-diem10cong');
+        handleImageUpload('input-logo-aitechco', 'logo-aitechco');
+        handleImageUpload('input-logo-schooli', 'logo-schooli');
+    </script>
+</body>
+</html>
