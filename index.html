@@ -83,17 +83,84 @@
             background: #002f53;
         }
 
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: linear-gradient(180deg, rgba(5, 24, 44, 0.28), rgba(5, 24, 44, 0));
+            border-bottom: 1px solid transparent;
+            transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
+        }
+        .site-header.is-scrolled,
+        .site-header.is-open {
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom-color: rgba(0, 47, 83, 0.08);
+            box-shadow: 0 10px 32px rgba(0, 15, 37, 0.08);
+        }
+        .header-logo {
+            display: flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 8px 24px rgba(0, 12, 32, 0.14);
+            transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
+        }
+        .site-header.is-scrolled .header-logo,
+        .site-header.is-open .header-logo {
+            background: transparent;
+            box-shadow: none;
+            padding: 4px 0;
+        }
+        .header-link {
+            color: #fff;
+        }
+        .header-link:hover {
+            background: rgba(255, 255, 255, 0.14);
+            color: #fff;
+        }
+        .site-header.is-scrolled .header-link,
+        .site-header.is-open .header-link {
+            color: #002f53;
+        }
+        .site-header.is-scrolled .header-link:hover,
+        .site-header.is-open .header-link:hover {
+            background: rgba(247, 209, 57, 0.22);
+            color: #002f53;
+        }
+        .header-menu {
+            color: #fff;
+        }
+        .site-header.is-scrolled .header-menu,
+        .site-header.is-open .header-menu {
+            color: #002f53;
+        }
+        .header-dropdown {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        .header-mobile-panel {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
         .ecosystem-hero {
             position: relative;
             isolation: isolate;
             width: 100%;
-            min-height: calc(100vh - 5rem);
+            min-height: 100svh;
             display: grid;
             justify-items: center;
             align-content: center;
             gap: 20px;
             overflow: hidden;
-            padding: 32px 20px;
+            padding: 104px 20px 40px;
         }
         .ecosystem-hero::before {
             position: absolute;
@@ -309,9 +376,9 @@
         }
         @media (max-width: 520px) {
             .ecosystem-hero {
-                min-height: calc(100svh - 5rem);
+                min-height: 100svh;
                 gap: 18px;
-                padding: 30px 12px;
+                padding: 96px 12px 28px;
             }
             .ecosystem {
                 width: min(96vw, 440px, calc(100svh - 150px));
@@ -331,20 +398,20 @@
 <body class="bg-white text-brand-text flex flex-col min-h-screen">
 
     <!-- HEADER SECTION -->
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-brand-main/20 shadow-sm transition-all duration-300 rounded-b-xl">
+    <header id="site-header" class="site-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
             <!-- LOGO CÔNG TY -->
-            <a href="#" class="flex items-center group py-2">
+            <a href="#" class="header-logo group">
                 <img id="header-logo-img" 
                      src="logo-banviet.png" 
                      alt="Logo Công Ty TNHH Công Nghệ Giáo Dục Bản Việt" 
-                     class="h-14 sm:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
+                     class="h-11 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
             </a>
 
             <!-- NAVIGATION MENU -->
             <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
-                <a href="#about" class="inline-flex items-center gap-2 px-4 py-2 text-sm lg:text-base font-bold text-brand-text hover:text-brand-text hover:bg-brand-hover/20 rounded-lg transition-colors">
+                <a href="#about" class="header-link inline-flex items-center gap-2 px-4 py-2 text-sm lg:text-base font-bold rounded-full transition-colors">
                     <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-5.3-3.78M9 20H2v-2a4 4 0 015.3-3.78M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 000 7.75M12 14a4 4 0 100-8 4 4 0 000 8z"></path>
                     </svg>
@@ -353,17 +420,17 @@
 
                 <!-- DROPDOWN THƯƠNG HIỆU -->
                 <div class="relative group">
-                    <button class="px-4 py-2 text-sm lg:text-base font-bold text-brand-text hover:text-brand-text hover:bg-brand-hover/20 rounded-lg transition-colors inline-flex items-center gap-1.5">
+                    <button class="header-link px-4 py-2 text-sm lg:text-base font-bold rounded-full transition-colors inline-flex items-center gap-1.5">
                         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a2 2 0 012-2h3a2 2 0 012 2v3a2 2 0 01-2 2H6a2 2 0 01-2-2V5zM14 5a2 2 0 012-2h2a2 2 0 012 2v3a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM4 16a2 2 0 012-2h3a2 2 0 012 2v3a2 2 0 01-2 2H6a2 2 0 01-2-2v-3zM14 16a2 2 0 012-2h2a2 2 0 012 2v3a2 2 0 01-2 2h-2a2 2 0 01-2-2v-3z"></path>
                         </svg>
                         Thương Hiệu
-                        <svg class="w-4 h-4 text-brand-text transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
                     
-                    <div class="absolute left-0 mt-1 w-64 bg-white rounded-2xl shadow-xl border border-brand-main/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-1 p-2 z-50">
+                    <div class="header-dropdown absolute left-0 mt-2 w-64 rounded-2xl shadow-xl border border-white/40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-1 p-2 z-50">
                         <a href="#brand-danhlingo" class="flex items-center gap-3 p-3 rounded-xl hover:bg-brand-main/10 transition-colors group/item">
                             <div class="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 font-extrabold group-hover/item:scale-110 transition-transform">D</div>
                             <div>
@@ -395,13 +462,13 @@
                     </div>
                 </div>
 
-                <a href="#news" class="inline-flex items-center gap-2 px-4 py-2 text-sm lg:text-base font-bold text-brand-text hover:text-brand-text hover:bg-brand-hover/20 rounded-lg transition-colors">
+                <a href="#news" class="header-link inline-flex items-center gap-2 px-4 py-2 text-sm lg:text-base font-bold rounded-full transition-colors">
                     <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2zM7 8h4m-4 4h10m-10 4h10m-2-8h2"></path>
                     </svg>
                     Tin Tức
                 </a>
-                <a href="#careers" class="inline-flex items-center gap-2 px-4 py-2 text-sm lg:text-base font-bold text-brand-text hover:text-brand-text hover:bg-brand-hover/20 rounded-lg transition-colors">
+                <a href="#careers" class="header-link inline-flex items-center gap-2 px-4 py-2 text-sm lg:text-base font-bold rounded-full transition-colors">
                     <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V8zM8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m-13 5h18m-11 0v2h4v-2"></path>
                     </svg>
@@ -410,19 +477,19 @@
             </nav>
 
             <div class="hidden lg:flex items-center">
-                <a href="#contact" class="px-5 py-2.5 bg-brand-hover hover:bg-yellow-400 text-brand-text font-extrabold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                <a href="#contact" class="px-5 py-2.5 bg-brand-hover hover:bg-yellow-400 text-brand-text font-extrabold rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
                     Liên Hệ Ngay
                 </a>
             </div>
 
-            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-brand-text hover:bg-brand-main/10">
+            <button id="mobile-menu-btn" class="header-menu md:hidden p-2 rounded-full hover:bg-white/15 transition-colors" aria-expanded="false" aria-controls="mobile-menu">
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-brand-main/20 px-4 pt-2 pb-6 space-y-2">
+        <div id="mobile-menu" class="header-mobile-panel hidden md:hidden border-t border-white/20 px-4 pt-2 pb-6 space-y-2">
             <a href="#about" class="flex items-center gap-2 px-3 py-2 text-base font-bold text-brand-text rounded-lg hover:bg-brand-main/10">
                 <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-5.3-3.78M9 20H2v-2a4 4 0 015.3-3.78M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 000 7.75M12 14a4 4 0 100-8 4 4 0 000 8z"></path>
@@ -996,22 +1063,41 @@
 
     <!-- JAVASCRIPT XỬ LÝ UPLOAD ẢNH -->
     <script>
+        const siteHeader = document.getElementById('site-header');
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
+
+        const syncHeaderState = () => {
+            const menuOpen = mobileMenu && !mobileMenu.classList.contains('hidden');
+            siteHeader.classList.toggle('is-scrolled', window.scrollY > 24);
+            siteHeader.classList.toggle('is-open', menuOpen);
+            if (mobileBtn) {
+                mobileBtn.setAttribute('aria-expanded', menuOpen ? 'true' : 'false');
+            }
+        };
+
+        window.addEventListener('scroll', syncHeaderState, { passive: true });
+        syncHeaderState();
+
         mobileBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
+            syncHeaderState();
         });
 
         const toggleUploadBtn = document.getElementById('toggle-upload-panel');
         const closeUploadBtn = document.getElementById('close-upload-panel');
         const uploadPanel = document.getElementById('upload-panel');
 
-        toggleUploadBtn.addEventListener('click', () => {
-            uploadPanel.classList.toggle('hidden');
-        });
-        closeUploadBtn.addEventListener('click', () => {
-            uploadPanel.classList.add('hidden');
-        });
+        if (toggleUploadBtn && uploadPanel) {
+            toggleUploadBtn.addEventListener('click', () => {
+                uploadPanel.classList.toggle('hidden');
+            });
+        }
+        if (closeUploadBtn && uploadPanel) {
+            closeUploadBtn.addEventListener('click', () => {
+                uploadPanel.classList.add('hidden');
+            });
+        }
 
         function handleImageUpload(inputId, targetImgId) {
             const input = document.getElementById(inputId);
