@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a2a5c">
+    <title>Hệ sinh thái Bản Việt</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+            color: #002f53;
+            background: #f4f9fc;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            overflow-x: hidden;
+            background:
+                radial-gradient(ellipse at 50% 48%, rgba(92, 180, 227, 0.15), transparent 56%),
+                #f4f9fc;
+        }
+
+        main {
+            position: relative;
+            isolation: isolate;
+            width: 100%;
+            min-height: 100vh;
+            display: grid;
+            justify-items: center;
+            align-content: center;
+            gap: 24px;
+            padding: 40px 20px;
+        }
+
+        main::before {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background:
+                linear-gradient(135deg, rgba(5, 24, 44, 0.58), rgba(8, 35, 62, 0.72)),
+                url("background.jpg") center 12% / cover no-repeat;
+            content: "";
+        }
+
+        .eyebrow {
+            margin: 0;
+            padding: 9px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 999px;
+            background: rgba(5, 24, 44, 0.32);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+        }
+
+        .ecosystem {
+            position: relative;
+            isolation: isolate;
+            width: min(88vw, 720px);
+            aspect-ratio: 1;
+            /* border: 8px solid #fff; */
+            border-radius: 50%;
+            /* background: #fff; */
+            box-shadow:
+                0 28px 70px rgba(0, 47, 83, 0.17),
+                0 0 0 1px rgba(0, 47, 83, 0.05);
+        }
+
+        .wings {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .wing-base {
+            /* stroke: #fff; */
+            stroke-width: 12;
+            stroke-linejoin: round;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .wing-image {
+            opacity: 0.9;
+        }
+
+        .wing-tint {
+            opacity: 0.32;
+        }
+
+        .sector {
+            position: absolute;
+            z-index: 1;
+            display: grid;
+            justify-items: center;
+            gap: 7px;
+            width: 30%;
+            color: #fff;
+            font-size: clamp(9px, 1.6vw, 13px);
+            font-weight: 900;
+            letter-spacing: 0.11em;
+            text-align: center;
+            text-shadow: 0 2px 9px rgba(0, 25, 50, 0.48);
+            pointer-events: none;
+        }
+
+        .sector svg {
+            width: clamp(23px, 4vw, 34px);
+            height: clamp(23px, 4vw, 34px);
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 1.7;
+            filter: drop-shadow(0 1px 4px rgba(0, 25, 50, 0.35));
+        }
+
+        .sector--north {
+            top: 9%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .sector--east {
+            top: 50%;
+            right: 7%;
+            transform: translateY(-50%);
+        }
+
+        .sector--south {
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .sector--west {
+            top: 50%;
+            left: 7%;
+            transform: translateY(-50%);
+        }
+
+        .brand-orb {
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            left: 50%;
+            width: 36%;
+            aspect-ratio: 1;
+            overflow: hidden;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 224, 135, 0.88);
+            border-radius: 50%;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(102, 166, 236, 0.5), transparent 44%),
+                radial-gradient(circle at 82% 73%, rgba(59, 132, 210, 0.42), transparent 43%),
+                linear-gradient(145deg, #1e4e8c 0%, #10396f 38%, #0a2a5c 72%, #071d42 100%);
+            box-shadow:
+                0 0 0 5px rgba(255, 255, 255, 0.92),
+                0 14px 38px rgba(0, 15, 37, 0.42),
+                0 0 36px rgba(63, 135, 218, 0.26),
+                inset 0 9px 26px rgba(197, 224, 255, 0.17),
+                inset 0 -22px 38px rgba(0, 12, 37, 0.36);
+            color: #fff;
+            text-align: center;
+            transform: translate(-50%, -50%);
+        }
+
+        .brand-orb::before {
+            position: absolute;
+            inset: 4%;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50%;
+            content: "";
+            pointer-events: none;
+        }
+
+        .brand-orb__globe {
+            position: absolute;
+            right: -13%;
+            bottom: -6%;
+            z-index: 0;
+            width: 68%;
+            height: 68%;
+            color: #8bd8ff;
+            opacity: 0.19;
+            filter: drop-shadow(0 0 14px rgba(80, 183, 255, 0.4));
+            transform: rotate(-12deg);
+            pointer-events: none;
+        }
+
+        .brand-orb__content {
+            position: relative;
+            z-index: 1;
+            width: 82%;
+            display: grid;
+            justify-items: center;
+            align-content: center;
+            gap: clamp(4px, 1vw, 8px);
+            text-shadow: 0 2px 12px rgba(0, 14, 38, 0.38);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1px;
+            white-space: nowrap;
+        }
+
+        .brand__name {
+            color: #fff;
+            font-size: clamp(17px, 4.1vw, 34px);
+            font-weight: 900;
+            letter-spacing: -0.035em;
+            line-height: 1;
+        }
+
+        .brand__mark {
+            width: clamp(19px, 4.6vw, 38px);
+            height: clamp(19px, 4.6vw, 38px);
+            margin-left: 1px;
+            overflow: visible;
+        }
+
+        .brand__tagline {
+            margin: 0;
+            color: #ffe28a;
+            font-family: Georgia, serif;
+            font-size: clamp(5px, 1.15vw, 10px);
+            font-style: italic;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            line-height: 1.4;
+            white-space: nowrap;
+        }
+
+        .divider {
+            width: 43%;
+            height: 1px;
+            margin: 1px 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 224, 135, 0.9), transparent);
+            box-shadow: 0 0 7px rgba(255, 215, 0, 0.25);
+        }
+
+        .core-message {
+            margin: 0;
+            color: #fff;
+            font-size: clamp(8px, 1.8vw, 15px);
+            font-weight: 900;
+            letter-spacing: 0.09em;
+            line-height: 1.45;
+        }
+
+        .vision {
+            display: grid;
+            gap: 2px;
+            color: #f5e5b2;
+            font-size: clamp(6px, 1.3vw, 11px);
+            font-weight: 600;
+            letter-spacing: 0.025em;
+            line-height: 1.45;
+        }
+
+        .vision p {
+            margin: 0;
+        }
+
+        @media (max-width: 520px) {
+            main {
+                gap: 18px;
+                padding: 30px 12px;
+            }
+
+            .ecosystem {
+                width: min(96vw, 440px);
+                border-width: 6px;
+            }
+
+            .brand-orb {
+                width: 39%;
+            }
+
+            .sector--east {
+                right: 4%;
+            }
+
+            .sector--west {
+                left: 4%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <p class="eyebrow">Hệ sinh thái giáo dục Bản Việt</p>
+
+        <section class="ecosystem" aria-label="Sơ đồ hệ sinh thái Bản Việt gồm bốn lĩnh vực">
+            <!-- Thay đường dẫn images/canh-*.jpg bên dưới bằng ảnh của bạn. -->
+            <svg class="wings" viewBox="0 0 720 720" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                    <clipPath id="wing-north-clip">
+                        <path d="M260.8 249.9 A148 148 0 0 1 459.2 249.9 L587.5 107.4 A340 340 0 0 0 132.5 107.4Z"></path>
+                    </clipPath>
+                    <clipPath id="wing-east-clip">
+                        <path transform="rotate(90 360 360)" d="M260.8 249.9 A148 148 0 0 1 459.2 249.9 L587.5 107.4 A340 340 0 0 0 132.5 107.4Z"></path>
+                    </clipPath>
+                    <clipPath id="wing-south-clip">
+                        <path transform="rotate(180 360 360)" d="M260.8 249.9 A148 148 0 0 1 459.2 249.9 L587.5 107.4 A340 340 0 0 0 132.5 107.4Z"></path>
+                    </clipPath>
+                    <clipPath id="wing-west-clip">
+                        <path transform="rotate(270 360 360)" d="M260.8 249.9 A148 148 0 0 1 459.2 249.9 L587.5 107.4 A340 340 0 0 0 132.5 107.4Z"></path>
+                    </clipPath>
+                </defs>
+
+                <path class="wing-base" d="M260.8 249.9 A148 148 0 0 1 459.2 249.9 L587.5 107.4 A340 340 0 0 0 132.5 107.4Z" fill="#268bc7"></path>
+                <image class="wing-image" href="hinh-anh-khat-vong.webp" x="0" y="0" width="720" height="720" preserveAspectRatio="xMidYMid slice" clip-path="url(#wing-north-clip)"></image>
+                <path class="wing-tint" d="M260.8 249.9 A148 148 0 0 1 459.2 249.9 L587.5 107.4 A340 340 0 0 0 132.5 107.4Z" fill="#168bd0"></path>
+
+                <path class="wing-base" transform="rotate(90 360 360)" d="M260.8 249.9 A148 148 0 0 1 459.2 249.9 L587.5 107.4 A340 340 0 0 0 132.5 107.4Z" fill="#2c9e79"></path>
+                <image class="wing-image" href="hinh-anh-to-quoc.jpg" x="0" y="0" width="720" height="720" preserveAspectRatio="xMidYMid slice" clip-path="url(#wing-east-clip)"></image>
+                <path class="wing-tint" transform="rotate(90 360 360)" d="M260.8 249.9 A148 148 0 0 1 459.2 249.9 L587.5 107.4 A340 340 0 0 0 132.5 107.4Z" fill="#15986c"></path>
+
+                <path class="wing-base" transform="rotate(180 360 360)" d="M260.8 249.9 A148 148 0 0 1 459.2 249.9 L587.5 107.4 A340 340 0 0 0 132.5 107.4Z" fill="#d2a70d"></path>
+                <image class="wing-image" href="hinh-anh-khat-vong.webp" x="0" y="0" width="720" height="720" preserveAspectRatio="xMidYMid slice" clip-path="url(#wing-south-clip)"></image>
+                <path class="wing-tint" transform="rotate(180 360 360)" d="M260.8 249.9 A148 148 0 0 1 459.2 249.9 L587.5 107.4 A340 340 0 0 0 132.5 107.4Z" fill="#e2b817"></path>
+
+                <path class="wing-base" transform="rotate(270 360 360)" d="M260.8 249.9 A148 148 0 0 1 459.2 249.9 L587.5 107.4 A340 340 0 0 0 132.5 107.4Z" fill="#785db7"></path>
+                <image class="wing-image" href="hinh-anh-to-quoc.jpg" x="0" y="0" width="720" height="720" preserveAspectRatio="xMidYMid slice" clip-path="url(#wing-west-clip)"></image>
+                <path class="wing-tint" transform="rotate(270 360 360)" d="M260.8 249.9 A148 148 0 0 1 459.2 249.9 L587.5 107.4 A340 340 0 0 0 132.5 107.4Z" fill="#7557bb"></path>
+            </svg>
+
+            <div class="sector sector--north" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 19V5m0 14h16M7 15l4-4 3 2 5-6"></path>
+                    <path d="M15 7h4v4"></path>
+                </svg>
+                PHÁT TRIỂN
+            </div>
+            <div class="sector sector--east" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 3v3m0 12v3m9-9h-3M6 12H3m15.36-6.36-2.12 2.12M7.76 16.24l-2.12 2.12m12.72 0-2.12-2.12M7.76 7.76 5.64 5.64"></path>
+                    <circle cx="12" cy="12" r="4"></circle>
+                </svg>
+                CÔNG NGHỆ
+            </div>
+            <div class="sector sector--south" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 19.5A2.5 2.5 0 016.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"></path>
+                    <path d="M8 7h8m-8 4h8"></path>
+                </svg>
+                TRI THỨC
+            </div>
+            <div class="sector sector--west" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                    <path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                    <circle cx="10" cy="7" r="4"></circle>
+                    <path d="M20 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path>
+                </svg>
+                CON NGƯỜI
+            </div>
+
+            <div class="brand-orb" aria-label="Bản Việt - Con người là trung tâm">
+                <svg class="brand-orb__globe" viewBox="0 0 300 300" aria-hidden="true">
+                    <defs>
+                        <clipPath id="earth-clip">
+                            <circle cx="160" cy="155" r="112"></circle>
+                        </clipPath>
+                        <radialGradient id="earth-light" cx="35%" cy="25%" r="80%">
+                            <stop offset="0%" stop-color="#d9f4ff"></stop>
+                            <stop offset="100%" stop-color="#56a9e8"></stop>
+                        </radialGradient>
+                    </defs>
+                    <circle cx="160" cy="155" r="112" fill="url(#earth-light)" opacity="0.34"></circle>
+                    <g clip-path="url(#earth-clip)" fill="none" stroke="currentColor" stroke-width="1.4">
+                        <ellipse cx="160" cy="155" rx="46" ry="112"></ellipse>
+                        <ellipse cx="160" cy="155" rx="82" ry="112"></ellipse>
+                        <ellipse cx="160" cy="155" rx="108" ry="112"></ellipse>
+                        <ellipse cx="160" cy="155" rx="112" ry="36"></ellipse>
+                        <ellipse cx="160" cy="155" rx="112" ry="72"></ellipse>
+                        <path d="M48 155h224M58 110h204M58 200h204"></path>
+                        <path d="M111 55c-15 32-15 67 1 100-16 32-16 66-1 100M208 55c15 32 15 67-1 100 16 32 16 66 1 100"></path>
+                    </g>
+                </svg>
+
+                <div class="brand-orb__content">
+                    <div class="brand">
+                        <span class="brand__name">Bản Việt</span>
+                        <svg class="brand__mark" viewBox="0 0 56 56" role="img" aria-label="Địa cầu trong vòng cung vàng">
+                            <defs>
+                                <clipPath id="logo-globe-clip">
+                                    <circle cx="28" cy="28" r="17"></circle>
+                                </clipPath>
+                            </defs>
+                            <path d="M40 5a23 23 0 1 0 11 43A20 20 0 0 1 40 5z" fill="#ffd700"></path>
+                            <circle cx="28" cy="28" r="17" fill="#dff5ff"></circle>
+                            <g clip-path="url(#logo-globe-clip)" fill="none" stroke="#48a9e6" stroke-width="1.35">
+                                <ellipse cx="28" cy="28" rx="7" ry="17"></ellipse>
+                                <ellipse cx="28" cy="28" rx="13" ry="17"></ellipse>
+                                <path d="M11 28h34M14 20h28M14 36h28"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <p class="brand__tagline">Bản sắc Việt - Giá trị toàn cầu</p>
+                    <span class="divider" aria-hidden="true"></span>
+                    <h1 class="core-message">CON NGƯỜI<br>LÀ TRUNG TÂM</h1>
+                    <span class="divider" aria-hidden="true"></span>
+                    <div class="vision">
+                        <p>Kết nối tri thức</p>
+                        <p>Kiến tạo tương lai</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
