@@ -100,7 +100,7 @@
         .site-header.is-scrolled .brand-logo,
         .site-header.is-open .brand-logo {
             padding: 4px 0;
-            background: rgba(255, 255, 255, 0.94);
+            /* background: rgba(255, 255, 255, 0.94); */
             box-shadow: 0 5px 16px rgba(0, 12, 32, 0.2);
         }
 
@@ -114,8 +114,8 @@
 
         .brand-logo img {
             display: block;
-            width: 142px;
-            height: 48px;
+            width: 160px;
+            height: 70px;
             object-fit: contain;
         }
 
@@ -393,7 +393,7 @@
             max-height: 34%;
             margin-bottom: 8px;
             object-fit: contain;
-            filter: brightness(0) invert(1);
+            /* filter: brightness(0) invert(1);Forbit-core */
         }
 
         .orbit-core strong {
@@ -637,10 +637,20 @@
             transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
         }
 
-        .value-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(92, 180, 227, 0.55);
-            box-shadow: 0 18px 35px rgba(0, 47, 83, 0.1);
+        .value-card {
+            /* Các thuộc tính mặc định của card nếu có */
+            transition: all 0.3s ease; /* Thêm hiệu ứng chuyển động mượt mà */
+
+            &:hover {
+                transform: translateY(-5px);
+                border-color: rgba(92, 180, 227, 0.55);
+                box-shadow: 0 18px 35px rgba(0, 47, 83, 0.1);
+
+                /* Thay đổi màu của .value-number khi hover vào .value-card */
+                .value-number {
+                    color: rgba(0, 29, 53, 0.96);
+                }
+            }
         }
 
         .value-number {
@@ -1328,7 +1338,7 @@
             <div class="content-width hero-grid">
                 <div class="hero-copy">
                     <span class="eyebrow">Bản Việt EdTech · Bản sắc Việt, giá trị toàn cầu</span>
-                    <h1 id="about-title">Về Bản Việt — <span>Kiến Tạo</span> Tương Lai Giáo Dục Việt Nam</h1>
+                    <h1 id="about-title">Về Bản Việt <br><span>Kiến Tạo</span> Tương Lai Giáo Dục Việt Nam</h1>
                     <p>Nơi hội tụ của trí tuệ, công nghệ và con người, mang đến các giải pháp giáo dục toàn diện, hiện đại và tiếp cận toàn cầu.</p>
                     <div class="hero-actions">
                         <a class="button-primary" href="#story">Khám phá câu chuyện</a>
@@ -1339,8 +1349,8 @@
                 <div class="orbit-visual" role="img" aria-label="Hệ sinh thái Bản Việt kết nối con người, tri thức, công nghệ và phát triển">
                     <div class="orbit-ring" aria-hidden="true"></div>
                     <div class="orbit-core">
-                        <img src="logo-banviet.png" alt="">
-                        <strong>Bản Việt</strong>
+                        <img src="banviet_tach_nen (1).png" alt="">
+                        
                         <span>Con người là trung tâm</span>
                     </div>
                     <div class="orbit-node orbit-node--people">
