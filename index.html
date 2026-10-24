@@ -88,22 +88,36 @@
             z-index: 50;
             background: linear-gradient(180deg, rgba(5, 24, 44, 0.28), rgba(5, 24, 44, 0));
             border-bottom: 1px solid transparent;
-            transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
+            transition: width 0.35s ease, top 0.35s ease, left 0.35s ease, right 0.35s ease, transform 0.35s ease, border-radius 0.35s ease, background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
         }
         .site-header.is-scrolled,
         .site-header.is-open {
-            background: rgba(255, 255, 255, 0.78);
+            top: 12px;
+            left: 50%;
+            right: auto;
+            width: min(1180px, calc(100% - 32px));
+            transform: translateX(-50%);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 20px;
+            background: rgba(0, 29, 53, 0.96);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-            border-bottom-color: rgba(0, 47, 83, 0.08);
-            box-shadow: 0 10px 32px rgba(0, 15, 37, 0.08);
+            box-shadow: 0 14px 38px rgba(0, 15, 37, 0.28);
+        }
+        .site-header.is-scrolled > div,
+        .site-header.is-open > div {
+            width: calc(100% - 32px);
+            margin-right: auto;
+            margin-left: auto;
+            min-height: 64px;
+            border-radius:10px;
         }
         .header-logo {
             display: flex;
             align-items: center;
             padding: 6px 12px;
             border-radius: 16px;
-            background: rgba(255, 255, 255, 0.94);
+            /* background: rgba(255, 255, 255, 0.94); */
             box-shadow: 0 8px 24px rgba(0, 12, 32, 0.14);
             transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
         }
@@ -122,19 +136,19 @@
         }
         .site-header.is-scrolled .header-link,
         .site-header.is-open .header-link {
-            color: #002f53;
+            color: #fff;
         }
         .site-header.is-scrolled .header-link:hover,
         .site-header.is-open .header-link:hover {
             background: rgba(247, 209, 57, 0.22);
-            color: #002f53;
+            color: #ffe68a;
         }
         .header-menu {
             color: #fff;
         }
         .site-header.is-scrolled .header-menu,
         .site-header.is-open .header-menu {
-            color: #002f53;
+            color: #fff;
         }
         .header-dropdown {
             background: rgba(255, 255, 255, 0.92);
@@ -811,16 +825,16 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
             <!-- LOGO CÔNG TY -->
-            <!-- <a href="#" class="header-logo group">
+            <a href="#" class="header-logo group">
                 <img id="header-logo-img" 
-                     src="logo-banviet.png" 
+                     src="banviet_tach_nen (1).png" 
                      alt="Logo Công Ty TNHH Công Nghệ Giáo Dục Bản Việt" 
                      class="h-11 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
-            </a> -->
+            </a>
 
             <!-- NAVIGATION MENU -->
             <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
-                <a href="#about" class="header-link inline-flex items-center gap-2 px-4 py-2 text-sm lg:text-base font-bold rounded-full transition-colors">
+                <a href="ve-chung-toi.html" class="header-link inline-flex items-center gap-2 px-4 py-2 text-sm lg:text-base font-bold rounded-full transition-colors">
                     <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-5.3-3.78M9 20H2v-2a4 4 0 015.3-3.78M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 000 7.75M12 14a4 4 0 100-8 4 4 0 000 8z"></path>
                     </svg>
@@ -899,7 +913,7 @@
         </div>
 
         <div id="mobile-menu" class="header-mobile-panel hidden md:hidden border-t border-white/20 px-4 pt-2 pb-6 space-y-2">
-            <a href="#about" class="flex items-center gap-2 px-3 py-2 text-base font-bold text-brand-text rounded-lg hover:bg-brand-main/10">
+            <a href="ve-chung-toi.html" class="flex items-center gap-2 px-3 py-2 text-base font-bold text-brand-text rounded-lg hover:bg-brand-main/10">
                 <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-5.3-3.78M9 20H2v-2a4 4 0 015.3-3.78M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 000 7.75M12 14a4 4 0 100-8 4 4 0 000 8z"></path>
                 </svg>
