@@ -393,6 +393,278 @@
                 left: 3%;
             }
         }
+        .timeline-section {
+            padding: 88px 0 96px;
+            overflow: hidden;
+            background: linear-gradient(180deg, #f4faff 0%, #fff 100%);
+        }
+        .timeline-header {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 36px;
+        }
+        .timeline-heading {
+            max-width: 720px;
+        }
+        .timeline-kicker {
+            display: inline-block;
+            margin-bottom: 12px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(92, 180, 227, 0.16);
+            color: #002f53;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+        .timeline-title {
+            margin: 0;
+            color: #002f53;
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 900;
+            line-height: 1.15;
+        }
+        .timeline-subtitle {
+            margin: 12px 0 0;
+            color: #5b7180;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        .timeline-controls {
+            display: flex;
+            flex: 0 0 auto;
+            gap: 10px;
+        }
+        .timeline-control {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(0, 47, 83, 0.16);
+            border-radius: 15px;
+            background: #fff;
+            color: #002f53;
+            box-shadow: 0 5px 16px rgba(0, 47, 83, 0.08);
+            cursor: pointer;
+            transition: background 180ms ease, color 180ms ease, opacity 180ms ease, transform 180ms ease;
+        }
+        .timeline-control:hover:not(:disabled) {
+            transform: translateY(-2px);
+            background: #f7d139;
+        }
+        .timeline-control:disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        .timeline-control svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 2;
+        }
+        .timeline-viewport {
+            overflow-x: auto;
+            overflow-y: hidden;
+            overscroll-behavior-inline: contain;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            cursor: grab;
+            touch-action: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .timeline-viewport::-webkit-scrollbar {
+            display: none;
+        }
+        .timeline-viewport.is-dragging {
+            cursor: grabbing;
+            scroll-snap-type: none;
+            scroll-behavior: auto;
+            user-select: none;
+        }
+        .timeline-track {
+            --timeline-gap: 24px;
+            display: flex;
+            align-items: stretch;
+            gap: var(--timeline-gap);
+            width: max-content;
+            min-width: 100%;
+            padding: 4px 2px 0;
+        }
+        .timeline-item {
+            position: relative;
+            flex: 0 0 clamp(300px, 29vw, 356px);
+            padding-bottom: 46px;
+            scroll-snap-align: start;
+        }
+        .timeline-item::after {
+            position: absolute;
+            z-index: 0;
+            right: calc(-1 * (50% + var(--timeline-gap)));
+            bottom: 20px;
+            left: 50%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, rgba(92, 180, 227, 0.62) 0 7px, transparent 7px 13px);
+            content: "";
+            pointer-events: none;
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        .timeline-card {
+            height: 100%;
+            overflow: hidden;
+            border: 1px solid rgba(92, 180, 227, 0.24);
+            border-radius: 22px;
+            background: #fff;
+            box-shadow: 0 10px 28px rgba(0, 47, 83, 0.08);
+            transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+        }
+        .timeline-item:hover .timeline-card {
+            transform: translateY(-8px);
+            border-color: rgba(92, 180, 227, 0.8);
+            box-shadow: 0 22px 42px rgba(0, 47, 83, 0.15);
+        }
+        .timeline-media {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #dceef6;
+        }
+        .timeline-media img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 350ms ease;
+        }
+        .timeline-item:hover .timeline-media img {
+            transform: scale(1.04);
+        }
+        .timeline-year {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            padding: 7px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 999px;
+            background: rgba(0, 47, 83, 0.88);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+        }
+        .timeline-card-body {
+            padding: 21px 22px 22px;
+        }
+        .timeline-card-title {
+            margin: 0 0 9px;
+            color: #002f53;
+            font-size: 19px;
+            font-weight: 900;
+            line-height: 1.35;
+        }
+        .timeline-card-description {
+            min-height: 66px;
+            margin: 0;
+            color: #647785;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .timeline-metric {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 16px;
+            padding: 7px 10px;
+            border-radius: 10px;
+            background: #eef8fc;
+            color: #174f70;
+            font-size: 11px;
+            font-weight: 800;
+        }
+        .timeline-node-row {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .timeline-node {
+            position: relative;
+            z-index: 2;
+            width: 18px;
+            height: 18px;
+            padding: 0;
+            border: 4px solid #fff;
+            border-radius: 50%;
+            background: #5cb4e3;
+            box-shadow: 0 0 0 2px #5cb4e3;
+            cursor: pointer;
+            transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+        }
+        .timeline-node:hover,
+        .timeline-item.is-active .timeline-node {
+            transform: scale(1.25);
+            background: #f7d139;
+            box-shadow: 0 0 0 2px #f7d139, 0 0 14px rgba(247, 209, 57, 0.7);
+        }
+        .timeline-node-label {
+            position: absolute;
+            top: 25px;
+            color: #587487;
+            font-size: 11px;
+            font-weight: 800;
+            white-space: nowrap;
+            transition: color 180ms ease, transform 180ms ease;
+        }
+        .timeline-item.is-active .timeline-node-label,
+        .timeline-node:hover + .timeline-node-label {
+            color: #002f53;
+            transform: scale(1.08);
+        }
+        .timeline-note {
+            margin: 14px 0 0;
+            color: #758895;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        @media (max-width: 640px) {
+            .timeline-section {
+                padding: 64px 0 72px;
+            }
+            .timeline-header {
+                align-items: flex-start;
+                margin-bottom: 25px;
+            }
+            .timeline-subtitle {
+                font-size: 13px;
+            }
+            .timeline-controls {
+                gap: 6px;
+            }
+            .timeline-control {
+                width: 40px;
+                height: 40px;
+                border-radius: 13px;
+            }
+            .timeline-track {
+                --timeline-gap: 16px;
+            }
+            .timeline-item {
+                flex-basis: min(82vw, 320px);
+            }
+        }
     </style>
 </head>
 <body class="bg-white text-brand-text flex flex-col min-h-screen">
@@ -762,6 +1034,135 @@
     </section>
 
 
+    <!-- SECTION HÀNH TRÌNH PHÁT TRIỂN -->
+    <section id="journey" class="timeline-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="timeline-header">
+                <div class="timeline-heading">
+                    <span class="timeline-kicker">Dấu mốc phát triển</span>
+                    <h2 class="timeline-title">Hành Trình Phát Triển</h2>
+                    <p class="timeline-subtitle">Từ những bước khởi đầu đến hành trình kiến tạo tương lai giáo dục.</p>
+                </div>
+                <div class="timeline-controls" aria-label="Điều hướng dòng thời gian">
+                    <button class="timeline-control" type="button" data-timeline-prev aria-label="Xem các mốc trước" aria-controls="journey-track" disabled>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"></path></svg>
+                    </button>
+                    <button class="timeline-control" type="button" data-timeline-next aria-label="Xem các mốc tiếp theo" aria-controls="journey-track">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="timeline-viewport" data-timeline-viewport id="journey-track" tabindex="0" aria-label="Dòng thời gian từ năm 2010 đến 2026. Cuộn ngang hoặc kéo để xem các dấu mốc.">
+                <div class="timeline-track">
+                    <article class="timeline-item is-active" data-timeline-item>
+                        <div class="timeline-card">
+                            <div class="timeline-media">
+                                <img src="anh_doi_ngu.png" alt="Hình ảnh minh họa cho giai đoạn khởi đầu" loading="lazy">
+                                <span class="timeline-year">2010</span>
+                            </div>
+                            <div class="timeline-card-body">
+                                <h3 class="timeline-card-title">Khởi Đầu Hành Trình</h3>
+                                <p class="timeline-card-description">Bổ sung câu chuyện, dấu mốc và hoạt động tiêu biểu của Bản Việt trong giai đoạn khởi đầu.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-node-row">
+                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến dấu mốc năm 2010"></button>
+                            <span class="timeline-node-label" aria-hidden="true">2010</span>
+                        </div>
+                    </article>
+
+                    <article class="timeline-item" data-timeline-item>
+                        <div class="timeline-card">
+                            <div class="timeline-media">
+                                <img src="hinh-anh-to-quoc.jpg" alt="Hình ảnh minh họa cho giai đoạn mở rộng" loading="lazy">
+                                <span class="timeline-year">2013</span>
+                            </div>
+                            <div class="timeline-card-body">
+                                <h3 class="timeline-card-title">Mở Rộng Hoạt Động</h3>
+                                <p class="timeline-card-description">Thêm thông tin về những bước phát triển, dự án hoặc hoạt động đáng nhớ trong giai đoạn này.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-node-row">
+                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến dấu mốc năm 2013"></button>
+                            <span class="timeline-node-label" aria-hidden="true">2013</span>
+                        </div>
+                    </article>
+
+                    <article class="timeline-item" data-timeline-item>
+                        <div class="timeline-card">
+                            <div class="timeline-media">
+                                <img src="anh_doi_ngu.png" alt="Hình ảnh minh họa cho giai đoạn đổi mới công nghệ" loading="lazy">
+                                <span class="timeline-year">2016</span>
+                            </div>
+                            <div class="timeline-card-body">
+                                <h3 class="timeline-card-title">Đổi Mới Cùng Công Nghệ</h3>
+                                <p class="timeline-card-description">Cập nhật giải pháp, sản phẩm hoặc cột mốc ứng dụng công nghệ trong hành trình giáo dục.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-node-row">
+                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến dấu mốc năm 2016"></button>
+                            <span class="timeline-node-label" aria-hidden="true">2016</span>
+                        </div>
+                    </article>
+
+                    <article class="timeline-item" data-timeline-item>
+                        <div class="timeline-card">
+                            <div class="timeline-media">
+                                <img src="hinh-anh-khat-vong.webp" alt="Hình ảnh minh họa cho giai đoạn chuyển đổi số" loading="lazy">
+                                <span class="timeline-year">2019</span>
+                            </div>
+                            <div class="timeline-card-body">
+                                <h3 class="timeline-card-title">Chuyển Mình Số Hóa</h3>
+                                <p class="timeline-card-description">Điền những thay đổi nổi bật, cột mốc chuyển đổi hoặc thành quả của đội ngũ trong năm.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-node-row">
+                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến dấu mốc năm 2019"></button>
+                            <span class="timeline-node-label" aria-hidden="true">2019</span>
+                        </div>
+                    </article>
+
+                    <article class="timeline-item" data-timeline-item>
+                        <div class="timeline-card">
+                            <div class="timeline-media">
+                                <img src="background-city.png" alt="Hình ảnh minh họa cho hệ sinh thái giáo dục" loading="lazy">
+                                <span class="timeline-year">2022</span>
+                            </div>
+                            <div class="timeline-card-body">
+                                <h3 class="timeline-card-title">Xây Dựng Hệ Sinh Thái</h3>
+                                <p class="timeline-card-description">Bổ sung quá trình hình thành các thương hiệu, sản phẩm và dịch vụ trong hệ sinh thái.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-node-row">
+                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến dấu mốc năm 2022"></button>
+                            <span class="timeline-node-label" aria-hidden="true">2022</span>
+                        </div>
+                    </article>
+
+                    <article class="timeline-item" data-timeline-item>
+                        <div class="timeline-card">
+                            <div class="timeline-media">
+                                <img src="anh-dia-cau.png" alt="Hình ảnh minh họa cho định hướng tương lai" loading="lazy">
+                                <span class="timeline-year">2026</span>
+                            </div>
+                            <div class="timeline-card-body">
+                                <h3 class="timeline-card-title">Hướng Tới Tương Lai</h3>
+                                <p class="timeline-card-description">Chia sẻ định hướng, cam kết và những mục tiêu tiếp theo của Bản Việt trong chặng đường mới.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-node-row">
+                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến dấu mốc năm 2026"></button>
+                            <span class="timeline-node-label" aria-hidden="true">2026</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <p class="timeline-note">Nội dung sự kiện và hình ảnh hiện là gợi ý minh họa; hãy thay bằng các dấu mốc thực tế của Bản Việt.</p>
+        </div>
+    </section>
+
+
     <!-- SECTION ĐỐI TÁC -->
     <section class="py-16 bg-brand-text text-white overflow-hidden relative border-y border-brand-main/20">
         <div class="max-w-7xl mx-auto px-4 mb-8 text-center">
@@ -1125,6 +1526,117 @@
         handleImageUpload('input-logo-diem10cong', 'logo-diem10cong');
         handleImageUpload('input-logo-aitechco', 'logo-aitechco');
         handleImageUpload('input-logo-schooli', 'logo-schooli');
+
+        const timelineViewport = document.querySelector('[data-timeline-viewport]');
+        if (timelineViewport) {
+            const timelineItems = Array.from(timelineViewport.querySelectorAll('[data-timeline-item]'));
+            const timelinePrev = document.querySelector('[data-timeline-prev]');
+            const timelineNext = document.querySelector('[data-timeline-next]');
+            let scrollUpdateFrame = 0;
+            let dragStartX = 0;
+            let dragStartScroll = 0;
+            let isDragging = false;
+
+            const updateTimelineState = () => {
+                const maxScroll = timelineViewport.scrollWidth - timelineViewport.clientWidth;
+                timelinePrev.disabled = timelineViewport.scrollLeft <= 4;
+                timelineNext.disabled = timelineViewport.scrollLeft >= maxScroll - 4;
+
+                const viewportCenter = timelineViewport.getBoundingClientRect().left + timelineViewport.clientWidth / 2;
+                let closestItem = null;
+                let closestDistance = Infinity;
+
+                timelineItems.forEach((item) => {
+                    const itemRect = item.getBoundingClientRect();
+                    const distance = Math.abs(itemRect.left + itemRect.width / 2 - viewportCenter);
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestItem = item;
+                    }
+                });
+
+                timelineItems.forEach((item) => {
+                    item.classList.toggle('is-active', item === closestItem);
+                });
+            };
+
+            const scheduleTimelineUpdate = () => {
+                if (scrollUpdateFrame) {
+                    cancelAnimationFrame(scrollUpdateFrame);
+                }
+                scrollUpdateFrame = requestAnimationFrame(updateTimelineState);
+            };
+
+            const scrollTimelineBy = (direction) => {
+                timelineViewport.scrollBy({
+                    left: direction * timelineViewport.clientWidth * 0.82,
+                    behavior: 'smooth'
+                });
+            };
+
+            timelinePrev.addEventListener('click', () => scrollTimelineBy(-1));
+            timelineNext.addEventListener('click', () => scrollTimelineBy(1));
+            timelineViewport.addEventListener('scroll', scheduleTimelineUpdate, { passive: true });
+            window.addEventListener('resize', scheduleTimelineUpdate, { passive: true });
+
+            timelineViewport.addEventListener('wheel', (event) => {
+                const maxScroll = timelineViewport.scrollWidth - timelineViewport.clientWidth;
+                if (maxScroll > 0 && Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+                    event.preventDefault();
+                    timelineViewport.scrollLeft += event.deltaY;
+                }
+            }, { passive: false });
+
+            timelineViewport.addEventListener('pointerdown', (event) => {
+                if (event.pointerType !== 'mouse' || event.button !== 0 || event.target.closest('button')) {
+                    return;
+                }
+                dragStartX = event.clientX;
+                dragStartScroll = timelineViewport.scrollLeft;
+                isDragging = true;
+            });
+
+            timelineViewport.addEventListener('pointermove', (event) => {
+                if (!isDragging || event.pointerType !== 'mouse') {
+                    return;
+                }
+                const distance = event.clientX - dragStartX;
+                if (Math.abs(distance) > 4) {
+                    timelineViewport.classList.add('is-dragging');
+                    timelineViewport.setPointerCapture(event.pointerId);
+                    timelineViewport.scrollLeft = dragStartScroll - distance;
+                    event.preventDefault();
+                }
+            });
+
+            const stopTimelineDrag = (event) => {
+                if (!isDragging) {
+                    return;
+                }
+                isDragging = false;
+                timelineViewport.classList.remove('is-dragging');
+                if (timelineViewport.hasPointerCapture(event.pointerId)) {
+                    timelineViewport.releasePointerCapture(event.pointerId);
+                }
+            };
+
+            timelineViewport.addEventListener('pointerup', stopTimelineDrag);
+            timelineViewport.addEventListener('pointercancel', stopTimelineDrag);
+
+            timelineViewport.querySelectorAll('[data-timeline-node]').forEach((node, index) => {
+                node.addEventListener('click', () => {
+                    const item = timelineItems[index];
+                    const viewportLeft = timelineViewport.getBoundingClientRect().left;
+                    const itemLeft = item.getBoundingClientRect().left;
+                    timelineViewport.scrollTo({
+                        left: timelineViewport.scrollLeft + itemLeft - viewportLeft,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            updateTimelineState();
+        }
     </script>
 </body>
 </html>
