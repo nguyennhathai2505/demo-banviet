@@ -1334,28 +1334,67 @@
             </h3>
         </div>
 
-        <div class="flex overflow-hidden select-none relative w-full">
-            <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-brand-text to-transparent z-10 pointer-events-none"></div>
-            <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-brand-text to-transparent z-10 pointer-events-none"></div>
+<div class="flex overflow-hidden select-none relative w-full">
+    <!-- Gradient mờ 2 bên -->
+    <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-brand-text to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-brand-text to-transparent z-10 pointer-events-none"></div>
 
-            <div class="flex items-center gap-12 sm:gap-16 shrink-0 animate-marquee marquee-track py-2 pr-12">
-                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">ĐẠI HỌC CÔNG NGHIỆP</div>
-                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">VIETTEL EDUTECH</div>
-                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">VNPT EDUCATION</div>
-                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">FPT POLYTECHNIC</div>
-                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">MICROSOFT EDUCATION</div>
-                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">AWS FOR EDUCATION</div>
-            </div>
-
-            <div class="flex items-center gap-12 sm:gap-16 shrink-0 animate-marquee marquee-track py-2 pr-12" aria-hidden="true">
-                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">ĐẠI HỌC CÔNG NGHIỆP</div>
-                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">VIETTEL EDUTECH</div>
-                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">VNPT EDUCATION</div>
-                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">FPT POLYTECHNIC</div>
-                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">MICROSOFT EDUCATION</div>
-                <div class="px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">AWS FOR EDUCATION</div>
-            </div>
+    <!-- Khối lặp lại thứ 1 -->
+    <div class="flex items-center gap-12 sm:gap-16 shrink-0 animate-marquee marquee-track py-2 pr-12">
+        <div class="flex items-center gap-3 px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">
+            <img src="iuh.png" alt="IUH Logo" class="h-6 w-auto object-contain">
+            <span>ĐẠI HỌC CÔNG NGHIỆP</span>
         </div>
+        <div class="flex items-center gap-3 px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">
+            <img src="viettel.png" alt="Viettel Logo" class="h-6 w-auto object-contain">
+            <span>VIETTEL EDUTECH</span>
+        </div>
+        <div class="flex items-center gap-3 px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">
+            <img src="vnpt.png" alt="VNPT Logo" class="h-6 w-auto object-contain">
+            <span>VNPT EDUCATION</span>
+        </div>
+        <div class="flex items-center gap-3 px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">
+            <img src="fpt.png" alt="FPT Logo" class="h-6 w-auto object-contain">
+            <span>FPT POLYTECHNIC</span>
+        </div>
+        <div class="flex items-center gap-3 px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">
+            <img src="microsoft.png" alt="Microsoft Logo" class="h-6 w-auto object-contain">
+            <span>MICROSOFT EDUCATION</span>
+        </div>
+        <div class="flex items-center gap-3 px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">
+            <img src="aws.png" alt="AWS Logo" class="h-6 w-auto object-contain">
+            <span>AWS FOR EDUCATION</span>
+        </div>
+    </div>
+
+    <!-- Khối lặp lại thứ 2 (aria-hidden) để chạy vô tận -->
+    <div class="flex items-center gap-12 sm:gap-16 shrink-0 animate-marquee marquee-track py-2 pr-12" aria-hidden="true">
+        <div class="flex items-center gap-3 px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">
+            <img src="iuh.png" alt="IUH Logo" class="h-6 w-auto object-contain">
+            <span>ĐẠI HỌC CÔNG NGHIỆP</span>
+        </div>
+        <div class="flex items-center gap-3 px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">
+            <img src="viettel.png" alt="Viettel Logo" class="h-6 w-auto object-contain">
+            <span>VIETTEL EDUTECH</span>
+        </div>
+        <div class="flex items-center gap-3 px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">
+            <img src="vnpt.png" alt="VNPT Logo" class="h-6 w-auto object-contain">
+            <span>VNPT EDUCATION</span>
+        </div>
+        <div class="flex items-center gap-3 px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">
+            <img src="fpt.png" alt="FPT Logo" class="h-6 w-auto object-contain">
+            <span>FPT POLYTECHNIC</span>
+        </div>
+        <div class="flex items-center gap-3 px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">
+            <img src="microsoft.png" alt="Microsoft Logo" class="h-6 w-auto object-contain">
+            <span>MICROSOFT EDUCATION</span>
+        </div>
+        <div class="flex items-center gap-3 px-6 py-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 font-black text-lg text-blue-100">
+            <img src="aws.png" alt="AWS Logo" class="h-6 w-auto object-contain">
+            <span>AWS FOR EDUCATION</span>
+        </div>
+    </div>
+</div>
     </section>
 
 
