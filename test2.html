@@ -3,330 +3,452 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bento Grid – EdTech & AI</title>
-    <!-- Tailwind CSS (CDN) -->
+    <title>Learning Journey Stepper – Lộ Trình Phát Triển Tri Thức</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome (Icon) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Glassmorphism & hiệu ứng bổ sung */
-        .glass {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.3);
-        }
-        .glass-light {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.08);
-        }
-        .glow-ai {
-            filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.7));
-        }
-        .glow-dashboard {
-            filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.6));
-        }
-        .glow-network {
-            filter: drop-shadow(0 0 10px rgba(52, 211, 153, 0.6));
-        }
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: minmax(120px, auto);
-            gap: 1.5rem;
-        }
-        /* Định vị từng thẻ */
-        .card-vision {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-        .card-ai {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-        .card-digital {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-        .card-connect {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-        .card-media {
-            grid-column: span 2;
-            grid-row: span 2;
+        /* ===== PALETTE: Edu-Blue & Warm Neutrals ===== */
+        :root {
+            --edu-blue: #2563eb;
+            --edu-blue-soft: #3b82f6;
+            --edu-blue-light: #dbeafe;
+            --warm-cream: #fffbeb;
+            --warm-amber: #f59e0b;
+            --warm-orange: #ea580c;
+            --edu-teal: #0d9488;
+            --neutral-bg: #f8fafc;
+            --neutral-card: #ffffff;
+            --neutral-border: #e2e8f0;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .bento-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .card-vision {
-                grid-column: span 2;
-                grid-row: span 1;
-            }
-            .card-media {
-                grid-column: span 2;
-                grid-row: span 1;
-            }
-        }
-        @media (max-width: 640px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
-            }
-            .card-vision,
-            .card-media,
-            .card-ai,
-            .card-digital,
-            .card-connect {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
+        body {
+            background-color: var(--neutral-bg);
+            color: #0f172a;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
-        /* Animation cho số đếm & video loop */
-        @keyframes pulse-slow {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.02); }
+        /* ===== FLAT CARD DESIGN ===== */
+        .flat-card {
+            background: var(--neutral-card);
+            border: 1px solid var(--neutral-border);
+            border-radius: 1.5rem;
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04),
+                        0 4px 12px rgba(15, 23, 42, 0.03);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .pulse-slow {
-            animation: pulse-slow 4s ease-in-out infinite;
+        .flat-card:hover {
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.08),
+                        0 2px 8px rgba(15, 23, 42, 0.04);
+            border-color: var(--edu-blue-light);
+            transform: translateY(-2px);
         }
+
+        /* ===== STEPPER LAYOUT ===== */
+        .stepper-container {
+            position: relative;
+        }
+
+        /* Đường nối ngang giữa các bước (desktop) */
+        .stepper-line {
+            position: absolute;
+            top: 4rem;
+            left: calc(16.666% + 2rem);
+            right: calc(16.666% + 2rem);
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--edu-blue-light) 0px,
+                var(--edu-blue-light) 8px,
+                transparent 8px,
+                transparent 16px
+            );
+            z-index: 0;
+        }
+
+        /* ===== STEP NUMBER BADGE ===== */
+        .step-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 1rem;
+            font-weight: 800;
+            font-size: 1.125rem;
+            letter-spacing: -0.02em;
+            position: relative;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        .step-badge-1 {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            color: #1d4ed8;
+            border: 1.5px solid #93c5fd;
+        }
+        .step-badge-2 {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #b45309;
+            border: 1.5px solid #fcd34d;
+        }
+        .step-badge-3 {
+            background: linear-gradient(135deg, #ccfbf1, #99f6e4);
+            color: #0f766e;
+            border: 1.5px solid #5eead4;
+        }
+        .step-card:hover .step-badge-1 {
+            background: linear-gradient(135deg, #bfdbfe, #93c5fd);
+            transform: scale(1.05);
+        }
+        .step-card:hover .step-badge-2 {
+            background: linear-gradient(135deg, #fde68a, #fcd34d);
+            transform: scale(1.05);
+        }
+        .step-card:hover .step-badge-3 {
+            background: linear-gradient(135deg, #99f6e4, #5eead4);
+            transform: scale(1.05);
+        }
+
+        /* ===== ICON CIRCLES ===== */
+        .icon-circle {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.875rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        .step-card:hover .icon-circle {
+            transform: scale(1.08) rotate(-3deg);
+        }
+
+        /* ===== STEP ARROW CONNECTOR (MOBILE) ===== */
+        .step-arrow {
+            color: #cbd5e1;
+            font-size: 1rem;
+        }
+
+        /* ===== COUNTER ===== */
         .counter {
             font-variant-numeric: tabular-nums;
         }
+
+        /* ===== BADGE ===== */
+        .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .pulse-soft {
+            animation: pulse-soft 3s ease-in-out infinite;
+        }
+
+        @keyframes slide-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-up {
+            animation: slide-up 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        .slide-up-1 { animation-delay: 0.05s; }
+        .slide-up-2 { animation-delay: 0.15s; }
+        .slide-up-3 { animation-delay: 0.25s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .stepper-line {
+                display: none;
+            }
+        }
+
+        /* ===== DECORATIVE DOT PATTERN ===== */
+        .dot-pattern {
+            background-image: radial-gradient(circle, #cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.4;
+        }
     </style>
 </head>
-<body class="bg-slate-900 text-white antialiased font-sans p-4 md:p-8 flex items-center justify-center min-h-screen">
+<body class="antialiased min-h-screen p-4 md:p-8">
 
-    <!-- Container chính – Bento Grid -->
-    <div class="max-w-7xl w-full mx-auto">
-        <div class="bento-grid">
+    <div class="max-w-6xl w-full mx-auto">
 
-            <!-- THẺ 1: TẦM NHÌN (LỚN NHẤT) – Glassmorphism + gradient mượt -->
-            <div class="card-vision glass rounded-3xl p-8 flex flex-col justify-center relative overflow-hidden bg-gradient-to-br from-slate-800/80 to-slate-900/80 border-white/10">
-                <!-- Hiệu ứng nền gradient mờ -->
-                <div class="absolute -top-20 -right-20 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"></div>
-                <div class="absolute -bottom-20 -left-20 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl"></div>
-                <!-- Nội dung -->
-                <div class="relative z-10">
-                    <span class="inline-block text-xs font-semibold tracking-widest uppercase text-cyan-400 mb-4 border border-cyan-400/30 px-3 py-1 rounded-full bg-cyan-400/10">
-                        <i class="fas fa-bolt mr-2"></i>Tầm nhìn
-                    </span>
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
-                        Nâng Tầm <br>
-                        <span class="bg-gradient-to-r from-purple-400 via-cyan-300 to-emerald-300 bg-clip-text text-transparent">Giáo Dục Việt</span><br>
-                        Bằng Sức Mạnh <br>Công Nghệ
-                    </h1>
-                    <p class="mt-6 text-slate-300 max-w-md text-base md:text-lg leading-relaxed">
-                        Chúng tôi kiến tạo hệ sinh thái học tập thông minh, kết nối tri thức và cá nhân hóa trải nghiệm cho hàng triệu học sinh.
-                    </p>
-                    <div class="mt-8 flex flex-wrap gap-4">
-                        <div class="flex items-center gap-2 text-sm text-slate-300">
-                            <i class="fas fa-check-circle text-emerald-400"></i> AI cá nhân hóa
-                        </div>
-                        <div class="flex items-center gap-2 text-sm text-slate-300">
-                            <i class="fas fa-check-circle text-cyan-400"></i> Số hóa toàn diện
-                        </div>
-                        <div class="flex items-center gap-2 text-sm text-slate-300">
-                            <i class="fas fa-check-circle text-purple-400"></i> Kết nối cộng đồng
-                        </div>
-                    </div>
-                </div>
+        <!-- ===== HEADER SECTION ===== -->
+        <div class="text-center mb-12 md:mb-16">
+            <div class="inline-flex items-center gap-2 pill-badge bg-blue-50 text-blue-700 border border-blue-200 mb-4">
+                <i class="fas fa-route"></i>
+                Lộ trình phát triển tri thức
             </div>
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                Sứ mệnh của chúng tôi
+            </h1>
+            <p class="mt-4 text-base md:text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+                Ba bước tiến bài bản, từ đổi mới công nghệ đến tương lai tri thức – kiến tạo nền giáo dục Việt Nam hiện đại và bền vững.
+            </p>
+        </div>
 
-            <!-- THẺ 2: SỨ MỆNH – 3 MINI-CARD: AI, SỐ HÓA, KẾT NỐI -->
-            <!-- Card AI -->
-            <div class="card-ai glass rounded-3xl p-6 flex flex-col items-start justify-between hover:scale-[1.02] transition-transform duration-300 border-white/10 group">
-                <div class="p-3 rounded-2xl bg-purple-500/20 text-purple-300 glow-ai mb-4 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-sparkles text-3xl"></i>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold text-white">Công nghệ AI</h3>
-                    <p class="text-sm text-slate-400 mt-1">Cá nhân hóa lộ trình học tập, dự đoán và hỗ trợ tức thời.</p>
-                </div>
-                <div class="mt-4 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-60"></div>
-            </div>
+        <!-- ===== STEPPER ===== -->
+        <div class="stepper-container relative">
+            <!-- Đường nối ngang (desktop) -->
+            <div class="stepper-line hidden md:block"></div>
 
-            <!-- Card Số hóa -->
-            <div class="card-digital glass rounded-3xl p-6 flex flex-col items-start justify-between hover:scale-[1.02] transition-transform duration-300 border-white/10 group">
-                <div class="p-3 rounded-2xl bg-cyan-500/20 text-cyan-300 glow-dashboard mb-4 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-cloud-upload-alt text-3xl"></i>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold text-white">Số hóa quản lý</h3>
-                    <p class="text-sm text-slate-400 mt-1">Dashboard thông minh, vận hành trường học không giấy tờ.</p>
-                </div>
-                <div class="mt-4 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-60"></div>
-            </div>
+            <!-- Grid 3 bước -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative z-10">
 
-            <!-- Card Kết nối -->
-            <div class="card-connect glass rounded-3xl p-6 flex flex-col items-start justify-between hover:scale-[1.02] transition-transform duration-300 border-white/10 group">
-                <div class="p-3 rounded-2xl bg-emerald-500/20 text-emerald-300 glow-network mb-4 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-users text-3xl"></i>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold text-white">Kết nối tri thức</h3>
-                    <p class="text-sm text-slate-400 mt-1">Cộng đồng học sinh, giáo viên và chuyên gia chất lượng cao.</p>
-                </div>
-                <div class="mt-4 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full opacity-60"></div>
-            </div>
-
-            <!-- THẺ 3: MEDIA / INTERACTIVE – VIDEO LOOP + STATS COUNTER -->
-            <div class="card-media glass rounded-3xl p-6 flex flex-col relative overflow-hidden border-white/10">
-                <!-- Lớp nền video/3D animation mô phỏng (dùng gradient động) -->
-                <div class="absolute inset-0 bg-gradient-to-tr from-cyan-900/40 via-slate-900/60 to-purple-900/40 z-0"></div>
-                <!-- Hiệu ứng UI/3D: các vòng tròn động + số liệu -->
-                <div class="relative z-10 flex flex-col h-full">
-                    <!-- Tiêu đề thẻ -->
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm font-semibold text-cyan-300 bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-400/20">
-                            <i class="fas fa-play-circle mr-1"></i> Nền tảng trực quan
+                <!-- ===== BƯỚC 01 ===== -->
+                <div class="step-card flat-card p-6 md:p-7 flex flex-col relative slide-up slide-up-1">
+                    <!-- Badge số bước -->
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="step-badge step-badge-1">01</div>
+                        <span class="pill-badge bg-blue-50 text-blue-700 border border-blue-100">
+                            <i class="fas fa-bolt text-[10px]"></i> Nền tảng
                         </span>
-                        <span class="text-xs text-slate-400">Live demo</span>
                     </div>
 
-                    <!-- Mô phỏng video loop: các UI card nhỏ + animation pulse -->
-                    <div class="flex-1 grid grid-cols-2 gap-3 mt-4">
-                        <!-- Cột trái: stats counter -->
-                        <div class="flex flex-col justify-center space-y-4">
-                            <!-- Học sinh -->
-                            <div class="glass-light bg-white/5 rounded-2xl p-4 text-center backdrop-blur-sm border-white/10">
-                                <div class="text-3xl md:text-4xl font-extrabold text-white counter" id="studentCounter">0</div>
-                                <div class="text-xs uppercase tracking-wider text-cyan-300 mt-1">Học sinh</div>
-                            </div>
-                            <!-- Trường học -->
-                            <div class="glass-light bg-white/5 rounded-2xl p-4 text-center backdrop-blur-sm border-white/10">
-                                <div class="text-3xl md:text-4xl font-extrabold text-white counter" id="schoolCounter">0</div>
-                                <div class="text-xs uppercase tracking-wider text-purple-300 mt-1">Trường học</div>
-                            </div>
+                    <!-- Icon minh họa -->
+                    <div class="icon-circle bg-blue-50 text-blue-600 mb-4">
+                        <i class="fas fa-robot text-xl"></i>
+                    </div>
+
+                    <!-- Tiêu đề -->
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">
+                        Đổi mới Công nghệ
+                    </h3>
+
+                    <!-- Mô tả -->
+                    <p class="text-sm text-slate-500 leading-relaxed flex-1">
+                        Ứng dụng AI giúp giáo viên tiết kiệm thời gian giảng dạy, tự động hóa soạn bài và chấm điểm thông minh.
+                    </p>
+
+                    <!-- Chỉ số nhỏ -->
+                    <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs text-slate-400">
+                            <i class="fas fa-clock text-blue-400"></i>
+                            <span>Tiết kiệm 40% thời gian</span>
                         </div>
-                        <!-- Cột phải: mô phỏng UI animation (3D card) -->
-                        <div class="flex flex-col justify-center items-center relative">
-                            <div class="w-full h-full min-h-[120px] rounded-2xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-white/10 flex items-center justify-center relative overflow-hidden pulse-slow">
-                                <!-- Hiệu ứng UI động: các chấm sáng -->
-                                <div class="absolute w-12 h-12 rounded-full bg-cyan-400/30 blur-xl top-2 left-2 animate-pulse"></div>
-                                <div class="absolute w-16 h-16 rounded-full bg-purple-400/20 blur-xl bottom-2 right-2 animate-pulse delay-700"></div>
-                                <!-- Icon dashboard/3d -->
-                                <i class="fas fa-cubes text-5xl text-white/40 drop-shadow-lg"></i>
-                                <!-- Các thanh chart nhỏ -->
-                                <div class="absolute bottom-3 left-3 right-3 flex justify-between items-end">
-                                    <div class="w-2 h-8 bg-cyan-400/60 rounded-t"></div>
-                                    <div class="w-2 h-12 bg-cyan-400/80 rounded-t"></div>
-                                    <div class="w-2 h-6 bg-cyan-400/40 rounded-t"></div>
-                                    <div class="w-2 h-10 bg-cyan-400/70 rounded-t"></div>
-                                    <div class="w-2 h-14 bg-cyan-400/90 rounded-t"></div>
-                                </div>
-                            </div>
-                            <span class="text-[10px] text-slate-400 mt-2 flex items-center gap-1">
-                                <i class="fas fa-circle text-[6px] text-emerald-400 animate-pulse"></i> Dữ liệu thời gian thực
-                            </span>
+                        <i class="fas fa-arrow-right text-blue-300 text-xs"></i>
+                    </div>
+                </div>
+
+                <!-- ===== BƯỚC 02 ===== -->
+                <div class="step-card flat-card p-6 md:p-7 flex flex-col relative slide-up slide-up-2">
+                    <!-- Badge số bước -->
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="step-badge step-badge-2">02</div>
+                        <span class="pill-badge bg-amber-50 text-amber-700 border border-amber-100">
+                            <i class="fas fa-cog text-[10px]"></i> Vận hành
+                        </span>
+                    </div>
+
+                    <!-- Icon minh họa -->
+                    <div class="icon-circle bg-amber-50 text-amber-600 mb-4">
+                        <i class="fas fa-chart-pie text-xl"></i>
+                    </div>
+
+                    <!-- Tiêu đề -->
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">
+                        Tối ưu Vận hành
+                    </h3>
+
+                    <!-- Mô tả -->
+                    <p class="text-sm text-slate-500 leading-relaxed flex-1">
+                        Số hóa toàn diện cho nhà trường & cơ sở giáo dục – quản lý hồ sơ, lịch học và tài chính trên một nền tảng.
+                    </p>
+
+                    <!-- Chỉ số nhỏ -->
+                    <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs text-slate-400">
+                            <i class="fas fa-check-circle text-amber-400"></i>
+                            <span>100% không giấy tờ</span>
+                        </div>
+                        <i class="fas fa-arrow-right text-amber-300 text-xs"></i>
+                    </div>
+                </div>
+
+                <!-- ===== BƯỚC 03 ===== -->
+                <div class="step-card flat-card p-6 md:p-7 flex flex-col relative slide-up slide-up-3">
+                    <!-- Badge số bước -->
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="step-badge step-badge-3">03</div>
+                        <span class="pill-badge bg-teal-50 text-teal-700 border border-teal-100">
+                            <i class="fas fa-rocket text-[10px]"></i> Tương lai
+                        </span>
+                    </div>
+
+                    <!-- Icon minh họa -->
+                    <div class="icon-circle bg-teal-50 text-teal-600 mb-4">
+                        <i class="fas fa-globe-asia text-xl"></i>
+                    </div>
+
+                    <!-- Tiêu đề -->
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">
+                        Tương lai Tri thức
+                    </h3>
+
+                    <!-- Mô tả -->
+                    <p class="text-sm text-slate-500 leading-relaxed flex-1">
+                        Kết nối cộng đồng học tập chất lượng cao trên toàn quốc – chia sẻ tri thức, hợp tác và phát triển bền vững.
+                    </p>
+
+                    <!-- Chỉ số nhỏ -->
+                    <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs text-slate-400">
+                            <i class="fas fa-users text-teal-400"></i>
+                            <span>63 tỉnh thành kết nối</span>
+                        </div>
+                        <i class="fas fa-check text-teal-400 text-xs"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Mũi tên nối (mobile) -->
+            <div class="flex md:hidden items-center justify-center gap-2 mt-4 mb-2 step-arrow">
+                <i class="fas fa-chevron-down text-slate-300"></i>
+                <span class="text-xs text-slate-400">Tiếp nối</span>
+                <i class="fas fa-chevron-down text-slate-300"></i>
+            </div>
+        </div>
+
+        <!-- ===== IMPACT STATS ROW ===== -->
+        <div class="mt-12 md:mt-16 flat-card p-6 md:p-8 relative overflow-hidden">
+            <!-- Dot pattern trang trí -->
+            <div class="absolute inset-0 dot-pattern pointer-events-none"></div>
+            
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-slate-900">Chỉ số tác động</h3>
+                            <p class="text-xs text-slate-400">Dữ liệu cập nhật 2025</p>
+                        </div>
+                    </div>
+                    <span class="pill-badge bg-emerald-50 text-emerald-700 border border-emerald-100">
+                        <i class="fas fa-arrow-up text-[10px]"></i> +15% YoY
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <!-- Học sinh -->
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user-graduate text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-slate-900 counter" id="studentCounter">0</div>
+                            <div class="text-xs text-slate-400 font-medium">Học sinh đồng hành</div>
                         </div>
                     </div>
 
-                    <!-- Dòng text mô tả thêm -->
-                    <div class="mt-4 flex items-center justify-between text-xs text-slate-400">
-                        <span><i class="fas fa-sync-alt mr-1 animate-spin-slow"></i> Cập nhật liên tục</span>
-                        <span class="text-emerald-300"><i class="fas fa-arrow-up mr-1"></i>+12% tháng này</span>
+                    <!-- Trường học -->
+                    <div class="flex items-center gap-4 sm:border-l sm:border-slate-100 sm:pl-6">
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-school text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-slate-900 counter" id="schoolCounter">0</div>
+                            <div class="text-xs text-slate-400 font-medium">Trường học kết nối</div>
+                        </div>
+                    </div>
+
+                    <!-- Hài lòng -->
+                    <div class="flex items-center gap-4 sm:border-l sm:border-slate-100 sm:pl-6">
+                        <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-heart text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-slate-900 counter" id="satisfyCounter">0</div>
+                            <div class="text-xs text-slate-400 font-medium">Tỷ lệ hài lòng</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Ghi chú nhỏ (tùy chọn) -->
-        <div class="text-center text-slate-500 text-xs mt-8">
-            Bento Grid Layout · Glassmorphism · AI & EdTech
+        <!-- ===== FOOTER NOTE ===== -->
+        <div class="text-center text-slate-400 text-xs mt-8">
+            Learning Journey Stepper · Thiết kế thẻ phẳng · Icon học thuật · EduTech 2025
         </div>
+
     </div>
 
-    <!-- JavaScript: đếm số liệu động & hiệu ứng nhỏ -->
+    <!-- ===== JAVASCRIPT: COUNTER ANIMATION ===== -->
     <script>
         (function() {
-            // Hàm đếm số từ 0 đến target
-            function animateCounter(element, target, duration = 2000) {
+            function animateCounter(element, target, duration = 2000, suffix = '') {
                 let startTimestamp = null;
                 const step = (timestamp) => {
                     if (!startTimestamp) startTimestamp = timestamp;
                     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    const current = Math.floor(progress * target);
-                    // Định dạng số: 100000 -> 100k hoặc 100,000
+                    // Easing out cubic
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.floor(eased * target);
+
                     if (target >= 100000) {
                         element.textContent = (current / 1000).toFixed(0) + 'k+';
+                    } else if (target === 98) {
+                        element.textContent = current + '%';
                     } else {
-                        element.textContent = current.toLocaleString('en-US');
+                        element.textContent = current.toLocaleString('en-US') + (suffix || '+');
                     }
+
                     if (progress < 1) {
                         window.requestAnimationFrame(step);
                     } else {
-                        // Đảm bảo hiển thị đúng số cuối cùng
                         if (target >= 100000) {
                             element.textContent = (target / 1000).toFixed(0) + 'k+';
+                        } else if (target === 98) {
+                            element.textContent = target + '%';
                         } else {
-                            element.textContent = target.toLocaleString('en-US') + '+';
+                            element.textContent = target.toLocaleString('en-US') + (suffix || '+');
                         }
                     }
                 };
                 window.requestAnimationFrame(step);
             }
 
-            // Khởi tạo khi DOM load xong
             document.addEventListener('DOMContentLoaded', () => {
                 const studentEl = document.getElementById('studentCounter');
                 const schoolEl = document.getElementById('schoolCounter');
+                const satisfyEl = document.getElementById('satisfyCounter');
 
-                // Bắt đầu animation đếm số
-                // Sử dụng Intersection Observer để chỉ chạy khi thẻ hiển thị
+                const statsCard = studentEl.closest('.flat-card');
+                if (!statsCard) return;
+
+                let hasAnimated = false;
+
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            // Reset và chạy lại animation (nếu cần)
-                            if (studentEl.textContent === '0') {
-                                animateCounter(studentEl, 100000, 2000);
-                                animateCounter(schoolEl, 500, 2000);
-                            }
+                        if (entry.isIntersecting && !hasAnimated) {
+                            hasAnimated = true;
+                            animateCounter(studentEl, 100000, 2200);
+                            animateCounter(schoolEl, 500, 2200);
+                            animateCounter(satisfyEl, 98, 2200);
                             observer.unobserve(entry.target);
                         }
                     });
                 }, { threshold: 0.3 });
 
-                const mediaCard = document.querySelector('.card-media');
-                if (mediaCard) observer.observe(mediaCard);
-
-                // Nếu thẻ đã hiển thị sẵn (do viewport nhỏ) thì kích hoạt ngay
-                if (mediaCard && mediaCard.getBoundingClientRect().top < window.innerHeight) {
-                    // Đảm bảo không chạy 2 lần
-                    setTimeout(() => {
-                        if (studentEl.textContent === '0') {
-                            animateCounter(studentEl, 100000, 2000);
-                            animateCounter(schoolEl, 500, 2000);
-                        }
-                    }, 300);
-                }
+                observer.observe(statsCard);
             });
-
-            // Thêm hiệu ứng nhỏ: thay đổi màu gradient nền của thẻ media nhẹ nhàng
-            // (có thể thêm nhưng không cần thiết)
         })();
     </script>
 
-    <!-- Tinh chỉnh thêm cho animation của các icon -->
-    <style>
-        .animate-spin-slow {
-            animation: spin 3s linear infinite;
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        /* Tăng hiệu ứng nổi bật cho counter */
-        .counter {
-            text-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
-        }
-    </style>
 </body>
 </html>
