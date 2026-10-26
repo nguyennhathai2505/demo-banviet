@@ -45,7 +45,7 @@
     <!-- Font Inter & Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -606,43 +606,59 @@
             }
         }
         .timeline-section {
-            padding: 88px 0 96px;
+            position: relative;
+            isolation: isolate;
+            padding: 88px 0 104px;
             overflow: hidden;
-            background: linear-gradient(180deg, #f4faff 0%, #fff 100%);
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f6fa 100%);
+        }
+        .timeline-architecture {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: clamp(120px, 19vw, 230px);
+            color: #3979a1;
+            opacity: 0.09;
+            pointer-events: none;
         }
         .timeline-header {
             display: flex;
-            align-items: end;
+            align-items: flex-end;
             justify-content: space-between;
             gap: 24px;
-            margin-bottom: 36px;
+            margin-bottom: 24px;
         }
         .timeline-heading {
             max-width: 720px;
         }
         .timeline-kicker {
             display: inline-block;
-            margin-bottom: 12px;
-            padding: 6px 12px;
+            margin-bottom: 13px;
+            padding: 7px 13px;
             border-radius: 999px;
-            background: rgba(92, 180, 227, 0.16);
-            color: #002f53;
-            font-size: 11px;
+            background: #e4f3fb;
+            color: #176b9b;
+            font-size: 10px;
             font-weight: 900;
-            letter-spacing: 0.14em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
         }
         .timeline-title {
             margin: 0;
             color: #002f53;
-            font-size: clamp(28px, 4vw, 42px);
+            font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(28px, 4vw, 43px);
             font-weight: 900;
-            line-height: 1.15;
+            letter-spacing: -0.045em;
+            line-height: 1.2;
         }
         .timeline-subtitle {
-            margin: 12px 0 0;
+            margin: 10px 0 0;
             color: #5b7180;
-            font-size: 15px;
+            font-size: 13px;
             line-height: 1.7;
         }
         .timeline-controls {
@@ -651,21 +667,23 @@
             gap: 10px;
         }
         .timeline-control {
-            width: 46px;
-            height: 46px;
+            width: 42px;
+            height: 42px;
             display: grid;
             place-items: center;
-            border: 1px solid rgba(0, 47, 83, 0.16);
-            border-radius: 15px;
+            border: 1px solid rgba(31, 105, 153, 0.16);
+            border-radius: 14px;
             background: #fff;
-            color: #002f53;
-            box-shadow: 0 5px 16px rgba(0, 47, 83, 0.08);
+            color: #176b9b;
+            box-shadow: 0 5px 16px rgba(0, 47, 83, 0.06);
             cursor: pointer;
-            transition: background 180ms ease, color 180ms ease, opacity 180ms ease, transform 180ms ease;
+            transition: background 180ms ease, color 180ms ease, opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease;
         }
         .timeline-control:hover:not(:disabled) {
             transform: translateY(-2px);
-            background: #f7d139;
+            background: #176b9b;
+            color: #fff;
+            box-shadow: 0 8px 18px rgba(23, 107, 155, 0.2);
         }
         .timeline-control:disabled {
             opacity: 0.4;
@@ -688,7 +706,7 @@
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
             cursor: grab;
-            touch-action: auto;
+            touch-action: pan-x pan-y;
             -webkit-overflow-scrolling: touch;
         }
         .timeline-viewport::-webkit-scrollbar {
@@ -701,180 +719,220 @@
             user-select: none;
         }
         .timeline-track {
-            --timeline-gap: 24px;
-            display: flex;
-            align-items: stretch;
-            gap: var(--timeline-gap);
+            --timeline-progress: 0%;
+            position: relative;
+            display: grid;
+            grid-auto-columns: clamp(250px, 22vw, 270px);
+            grid-auto-flow: column;
+            gap: 16px;
             width: max-content;
             min-width: 100%;
-            padding: 4px 2px 0;
+            padding: 0 2px 8px;
+        }
+        .timeline-track::before {
+            position: absolute;
+            top: 19px;
+            left: 21px;
+            z-index: 0;
+            width: calc(100% - 42px);
+            height: 2px;
+            border-radius: 999px;
+            content: "";
+            pointer-events: none;
+            background: linear-gradient(90deg, #2e9bd1 0 var(--timeline-progress), #d8e5ed var(--timeline-progress) 100%);
+            box-shadow: 0 0 10px rgba(46, 155, 209, 0.12);
         }
         .timeline-item {
             position: relative;
-            flex: 0 0 clamp(300px, 29vw, 356px);
-            padding-bottom: 46px;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
             scroll-snap-align: start;
         }
-        .timeline-item::after {
-            position: absolute;
-            z-index: 0;
-            right: calc(-1 * (50% + var(--timeline-gap)));
-            bottom: 20px;
-            left: 50%;
-            height: 2px;
-            background: repeating-linear-gradient(90deg, rgba(92, 180, 227, 0.62) 0 7px, transparent 7px 13px);
-            content: "";
-            pointer-events: none;
-        }
-        .timeline-item:last-child::after {
-            display: none;
-        }
         .timeline-card {
-            height: 100%;
-            overflow: hidden;
-            border: 1px solid rgba(92, 180, 227, 0.24);
+            position: relative;
+            flex: 1;
+            min-height: 250px;
+            margin-top: 8px;
+            padding: 20px 18px 21px;
+            border: 1px solid #e2eaf0;
             border-radius: 22px;
             background: #fff;
-            box-shadow: 0 10px 28px rgba(0, 47, 83, 0.08);
+            box-shadow: 0 10px 28px rgba(31, 72, 98, 0.07);
             transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
         }
-        .timeline-item:hover .timeline-card {
-            transform: translateY(-8px);
-            border-color: rgba(92, 180, 227, 0.8);
-            box-shadow: 0 22px 42px rgba(0, 47, 83, 0.15);
-        }
-        .timeline-media {
-            position: relative;
-            aspect-ratio: 16 / 9;
-            overflow: hidden;
-            background: #dceef6;
-        }
-        .timeline-media img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: cover;
-            transition: transform 350ms ease;
-        }
-        .timeline-item:hover .timeline-media img {
-            transform: scale(1.04);
-        }
-        .timeline-year {
-            position: absolute;
-            top: 14px;
-            left: 14px;
-            padding: 7px 12px;
-            border: 1px solid rgba(255, 255, 255, 0.55);
-            border-radius: 999px;
-            background: rgba(0, 47, 83, 0.88);
-            color: #fff;
-            font-size: 13px;
-            font-weight: 900;
-            letter-spacing: 0.04em;
-        }
-        .timeline-card-body {
-            padding: 21px 22px 22px;
-        }
-        .timeline-card-title {
-            margin: 0 0 9px;
-            color: #002f53;
-            font-size: 19px;
-            font-weight: 900;
-            line-height: 1.35;
-        }
-        .timeline-card-description {
-            min-height: 66px;
-            margin: 0;
-            color: #647785;
-            font-size: 13px;
-            line-height: 1.7;
-        }
-        .timeline-metric {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            margin-top: 16px;
-            padding: 7px 10px;
-            border-radius: 10px;
-            background: #eef8fc;
-            color: #174f70;
-            font-size: 11px;
-            font-weight: 800;
+        .timeline-item:hover .timeline-card,
+        .timeline-item.is-active .timeline-card {
+            transform: translateY(-5px);
+            border-color: rgba(46, 155, 209, 0.4);
+            box-shadow: 0 20px 38px rgba(31, 72, 98, 0.13);
         }
         .timeline-node-row {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            left: 0;
+            position: relative;
             z-index: 1;
-            height: 40px;
+            height: 60px;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
         .timeline-node {
-            position: relative;
-            z-index: 2;
-            width: 18px;
-            height: 18px;
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
             padding: 0;
-            border: 4px solid #fff;
+            border: 4px solid #f8fafc;
             border-radius: 50%;
-            background: #5cb4e3;
-            box-shadow: 0 0 0 2px #5cb4e3;
+            background: #fff;
+            color: #176b9b;
+            box-shadow: 0 0 0 2px #86c8e7, 0 3px 8px rgba(0, 47, 83, 0.1);
+            font-size: 9px;
+            font-weight: 900;
             cursor: pointer;
-            transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+            transition: transform 180ms ease, color 180ms ease, background 180ms ease, box-shadow 180ms ease;
         }
         .timeline-node:hover,
+        .timeline-node:focus-visible,
         .timeline-item.is-active .timeline-node {
-            transform: scale(1.25);
-            background: #f7d139;
-            box-shadow: 0 0 0 2px #f7d139, 0 0 14px rgba(247, 209, 57, 0.7);
+            transform: scale(1.1);
+            outline: none;
+            background: #176b9b;
+            color: #fff;
+            box-shadow: 0 0 0 2px #2e9bd1, 0 0 0 7px rgba(46, 155, 209, 0.14), 0 0 18px rgba(46, 155, 209, 0.3);
         }
-        .timeline-node-label {
-            position: absolute;
-            top: 25px;
-            color: #587487;
-            font-size: 11px;
-            font-weight: 800;
-            white-space: nowrap;
-            transition: color 180ms ease, transform 180ms ease;
+        .timeline-year {
+            margin: 0 0 10px;
+            color: #075a8b;
+            font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(25px, 2.3vw, 32px);
+            font-weight: 900;
+            letter-spacing: -0.055em;
+            line-height: 1.1;
         }
-        .timeline-item.is-active .timeline-node-label,
-        .timeline-node:hover + .timeline-node-label {
+        .timeline-badge {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 14px;
+            padding: 5px 9px;
+            border-radius: 999px;
+            background: #eaf5fb;
+            color: #277ca6;
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+        }
+        .timeline-card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .timeline-card-title {
+            margin: 0 0 10px;
             color: #002f53;
-            transform: scale(1.08);
+            font-size: 15px;
+            font-weight: 900;
+            line-height: 1.45;
+        }
+        .timeline-card-description {
+            margin: 0;
+            color: #647785;
+            font-size: 11px;
+            line-height: 1.75;
+        }
+        .timeline-metric {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 16px;
+            padding: 10px 11px;
+            border-radius: 12px;
+            background: #eef7fc;
+            color: #176b9b;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1.55;
+        }
+        .timeline-metric strong {
+            color: #075a8b;
+            font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 900;
+        }
+        .timeline-item.is-active .timeline-metric {
+            background: #e4f3fb;
         }
         .timeline-note {
-            margin: 14px 0 0;
+            margin: 15px 0 0;
             color: #758895;
-            font-size: 12px;
+            font-size: 10px;
             line-height: 1.6;
+        }
+        @media (max-width: 900px) {
+            .timeline-section {
+                padding: 72px 0 88px;
+            }
+            .timeline-header {
+                margin-bottom: 23px;
+            }
+            .timeline-subtitle {
+                font-size: 12px;
+            }
+            .timeline-track {
+                grid-auto-columns: clamp(260px, 38vw, 300px);
+                gap: 18px;
+            }
+            .timeline-card {
+                min-height: 238px;
+                padding: 21px;
+            }
         }
         @media (max-width: 640px) {
             .timeline-section {
-                padding: 64px 0 72px;
+                padding: 64px 0 76px;
             }
             .timeline-header {
                 align-items: flex-start;
-                margin-bottom: 25px;
+                gap: 14px;
+            }
+            .timeline-title {
+                font-size: clamp(27px, 7vw, 35px);
             }
             .timeline-subtitle {
-                font-size: 13px;
+                max-width: 440px;
+                font-size: 12px;
             }
             .timeline-controls {
                 gap: 6px;
             }
             .timeline-control {
-                width: 40px;
-                height: 40px;
+                width: 38px;
+                height: 38px;
                 border-radius: 13px;
             }
             .timeline-track {
-                --timeline-gap: 16px;
+                grid-auto-columns: min(84vw, 340px);
+                gap: 14px;
             }
-            .timeline-item {
-                flex-basis: min(82vw, 320px);
+            .timeline-card {
+                min-height: 220px;
+                padding: 20px;
+            }
+            .timeline-card-title {
+                font-size: 16px;
+            }
+            .timeline-card-description {
+                font-size: 12px;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .timeline-viewport {
+                scroll-behavior: auto;
+            }
+            .timeline-card,
+            .timeline-node,
+            .timeline-control {
+                transition: none;
             }
         }
     </style>
@@ -1261,12 +1319,18 @@
 
     <!-- SECTION HÀNH TRÌNH PHÁT TRIỂN -->
     <section id="journey" class="timeline-section">
+        <svg class="timeline-architecture" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M0 242h1440M64 242V136h145v106M78 136l58-55 58 55M96 242v-72h32v72m15-72h32v72M91 145h95M240 242V105h170v137m-170-112h170m-153 112V145h136v97m-108 0v-67h78v67m-45-67v67M450 242V150h164v92m-164-68h164m-143 68v-47h122v47m-81-47v47M660 242V93h190v149m-190-117h190m-170 117v-93h150v93m-111-93v93m72-93v93M895 242V126h160v116m-160-91h160m-140 91v-58h120v58m-80-58v58M1090 242V83h210v159m-210-126h210m-188 126v-99h166v99m-124-99v99m82-99v99M1332 242V144h76v98m-76-72h76m-58 72v-47h40v47"></path>
+                <path d="M121 136v-20h24v20m382 106v-38h44v38m177-149V64h31v29m340 33v-28h25v28m170-43V56h30v27"></path>
+            </g>
+        </svg>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="timeline-header">
                 <div class="timeline-heading">
-                    <span class="timeline-kicker">Dấu mốc phát triển</span>
-                    <h2 class="timeline-title">Hành Trình Phát Triển</h2>
-                    <p class="timeline-subtitle">Từ những bước khởi đầu đến hành trình kiến tạo tương lai giáo dục.</p>
+                    <span class="timeline-kicker">Hành Trình Phát Triển</span>
+                    <h2 class="timeline-title">Những Cột Mốc Tự Hào Qua Các Năm</h2>
+                    <p class="timeline-subtitle">Từ những bước khởi đầu đến hành trình mở rộng quy mô và kiến tạo giá trị công nghệ.</p>
                 </div>
                 <div class="timeline-controls" aria-label="Điều hướng dòng thời gian">
                     <button class="timeline-control" type="button" data-timeline-prev aria-label="Xem các mốc trước" aria-controls="journey-track" disabled>
@@ -1278,112 +1342,94 @@
                 </div>
             </div>
 
-            <div class="timeline-viewport" data-timeline-viewport id="journey-track" tabindex="0" aria-label="Dòng thời gian từ năm 2010 đến 2026. Cuộn ngang hoặc kéo để xem các dấu mốc.">
+            <div class="timeline-viewport" data-timeline-viewport id="journey-track" tabindex="0" aria-label="Dòng thời gian sáu cột mốc từ 2010 đến 2026. Cuộn hoặc vuốt ngang, hoặc dùng nút điều hướng để xem các cột mốc.">
                 <div class="timeline-track">
                     <article class="timeline-item is-active" data-timeline-item>
-                        <div class="timeline-card">
-                            <div class="timeline-media">
-                                <img src="anh_doi_ngu.png" alt="Hình ảnh minh họa cho giai đoạn khởi đầu" loading="lazy">
-                                <span class="timeline-year">2010</span>
-                            </div>
-                            <div class="timeline-card-body">
-                                <h3 class="timeline-card-title">Khởi Đầu Hành Trình</h3>
-                                <p class="timeline-card-description">Bổ sung câu chuyện, dấu mốc và hoạt động tiêu biểu của Bản Việt trong giai đoạn khởi đầu.</p>
-                            </div>
-                        </div>
                         <div class="timeline-node-row">
-                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến dấu mốc năm 2010"></button>
-                            <span class="timeline-node-label" aria-hidden="true">2010</span>
+                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến mốc năm 2010">01</button>
+                        </div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-body">
+                                <p class="timeline-year">2010</p>
+                                <span class="timeline-badge">Khởi đầu</span>
+                                <h3 class="timeline-card-title">Đặt nền móng giáo dục</h3>
+                                <p class="timeline-card-description">Khởi đầu hành trình nghiên cứu và đặt những nền móng đầu tiên cho chặng đường phát triển giáo dục.</p>
+                            </div>
                         </div>
                     </article>
 
                     <article class="timeline-item" data-timeline-item>
-                        <div class="timeline-card">
-                            <div class="timeline-media">
-                                <img src="hinh-anh-to-quoc.jpg" alt="Hình ảnh minh họa cho giai đoạn mở rộng" loading="lazy">
-                                <span class="timeline-year">2013</span>
-                            </div>
-                            <div class="timeline-card-body">
-                                <h3 class="timeline-card-title">Mở Rộng Hoạt Động</h3>
-                                <p class="timeline-card-description">Thêm thông tin về những bước phát triển, dự án hoặc hoạt động đáng nhớ trong giai đoạn này.</p>
-                            </div>
-                        </div>
                         <div class="timeline-node-row">
-                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến dấu mốc năm 2013"></button>
-                            <span class="timeline-node-label" aria-hidden="true">2013</span>
+                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến mốc năm 2013">02</button>
+                        </div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-body">
+                                <p class="timeline-year">2013</p>
+                                <span class="timeline-badge">Mở rộng</span>
+                                <h3 class="timeline-card-title">Mở rộng hoạt động đào tạo</h3>
+                                <p class="timeline-card-description">Mở rộng quy mô hoạt động và triển khai các lớp học chất lượng cao.</p>
+                            </div>
                         </div>
                     </article>
 
                     <article class="timeline-item" data-timeline-item>
-                        <div class="timeline-card">
-                            <div class="timeline-media">
-                                <img src="anh_doi_ngu.png" alt="Hình ảnh minh họa cho giai đoạn đổi mới công nghệ" loading="lazy">
-                                <span class="timeline-year">2016</span>
-                            </div>
-                            <div class="timeline-card-body">
-                                <h3 class="timeline-card-title">Đổi Mới Cùng Công Nghệ</h3>
-                                <p class="timeline-card-description">Cập nhật giải pháp, sản phẩm hoặc cột mốc ứng dụng công nghệ trong hành trình giáo dục.</p>
-                            </div>
-                        </div>
                         <div class="timeline-node-row">
-                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến dấu mốc năm 2016"></button>
-                            <span class="timeline-node-label" aria-hidden="true">2016</span>
+                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến mốc năm 2016">03</button>
+                        </div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-body">
+                                <p class="timeline-year">2016</p>
+                                <span class="timeline-badge">Công nghệ</span>
+                                <h3 class="timeline-card-title">Đổi mới cùng công nghệ</h3>
+                                <p class="timeline-card-description">Bắt đầu đổi mới bằng việc số hóa tài liệu và bài giảng, mở rộng cách tiếp cận học tập.</p>
+                            </div>
                         </div>
                     </article>
 
                     <article class="timeline-item" data-timeline-item>
-                        <div class="timeline-card">
-                            <div class="timeline-media">
-                                <img src="hinh-anh-khat-vong.webp" alt="Hình ảnh minh họa cho giai đoạn chuyển đổi số" loading="lazy">
-                                <span class="timeline-year">2019</span>
-                            </div>
-                            <div class="timeline-card-body">
-                                <h3 class="timeline-card-title">Chuyển Mình Số Hóa</h3>
-                                <p class="timeline-card-description">Điền những thay đổi nổi bật, cột mốc chuyển đổi hoặc thành quả của đội ngũ trong năm.</p>
-                            </div>
-                        </div>
                         <div class="timeline-node-row">
-                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến dấu mốc năm 2019"></button>
-                            <span class="timeline-node-label" aria-hidden="true">2019</span>
+                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến mốc năm 2019">04</button>
+                        </div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-body">
+                                <p class="timeline-year">2019</p>
+                                <span class="timeline-badge">Chuyển đổi số</span>
+                                <h3 class="timeline-card-title">Chuyển mình số hóa</h3>
+                                <p class="timeline-card-description">Định hướng phát triển các giải pháp quản lý học tập thông minh cho hoạt động giáo dục.</p>
+                            </div>
                         </div>
                     </article>
 
                     <article class="timeline-item" data-timeline-item>
-                        <div class="timeline-card">
-                            <div class="timeline-media">
-                                <img src="background-city.png" alt="Hình ảnh minh họa cho hệ sinh thái giáo dục" loading="lazy">
-                                <span class="timeline-year">2022</span>
-                            </div>
-                            <div class="timeline-card-body">
-                                <h3 class="timeline-card-title">Xây Dựng Hệ Sinh Thái</h3>
-                                <p class="timeline-card-description">Bổ sung quá trình hình thành các thương hiệu, sản phẩm và dịch vụ trong hệ sinh thái.</p>
-                            </div>
-                        </div>
                         <div class="timeline-node-row">
-                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến dấu mốc năm 2022"></button>
-                            <span class="timeline-node-label" aria-hidden="true">2022</span>
+                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến mốc năm 2022">05</button>
+                        </div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-body">
+                                <p class="timeline-year">2022</p>
+                                <span class="timeline-badge">Hệ sinh thái</span>
+                                <h3 class="timeline-card-title">Xây dựng hệ sinh thái</h3>
+                                <p class="timeline-card-description">Phát triển hệ sinh thái đa thương hiệu, kết nối các giải pháp và nhu cầu giáo dục.</p>
+                            </div>
                         </div>
                     </article>
 
                     <article class="timeline-item" data-timeline-item>
-                        <div class="timeline-card">
-                            <div class="timeline-media">
-                                <img src="anh-dia-cau.png" alt="Hình ảnh minh họa cho định hướng tương lai" loading="lazy">
-                                <span class="timeline-year">2026</span>
-                            </div>
-                            <div class="timeline-card-body">
-                                <h3 class="timeline-card-title">Hướng Tới Tương Lai</h3>
-                                <p class="timeline-card-description">Chia sẻ định hướng, cam kết và những mục tiêu tiếp theo của Bản Việt trong chặng đường mới.</p>
-                            </div>
-                        </div>
                         <div class="timeline-node-row">
-                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến dấu mốc năm 2026"></button>
-                            <span class="timeline-node-label" aria-hidden="true">2026</span>
+                            <button class="timeline-node" type="button" data-timeline-node aria-label="Chuyển đến mốc năm 2026">06</button>
+                        </div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-body">
+                                <p class="timeline-year">2026</p>
+                                <span class="timeline-badge">Tương lai số</span>
+                                <h3 class="timeline-card-title">Hướng tới tương lai số</h3>
+                                <p class="timeline-card-description">Định hướng tích hợp sâu rộng trí tuệ nhân tạo vào hệ thống và hành trình học tập.</p>
+                            </div>
                         </div>
                     </article>
                 </div>
             </div>
-            <p class="timeline-note">Nội dung sự kiện và hình ảnh hiện là gợi ý minh họa; hãy thay bằng các dấu mốc thực tế của Bản Việt.</p>
+            <p class="timeline-note">Dùng các nút điều hướng, cuộn ngang hoặc vuốt để khám phá hành trình từ 2010 đến 2026.</p>
         </div>
     </section>
 
@@ -1796,6 +1842,7 @@
             const timelineItems = Array.from(timelineViewport.querySelectorAll('[data-timeline-item]'));
             const timelinePrev = document.querySelector('[data-timeline-prev]');
             const timelineNext = document.querySelector('[data-timeline-next]');
+            const timelineTrack = timelineViewport.querySelector('.timeline-track');
             let scrollUpdateFrame = 0;
             let dragStartX = 0;
             let dragStartScroll = 0;
@@ -1806,22 +1853,41 @@
                 timelinePrev.disabled = timelineViewport.scrollLeft <= 4;
                 timelineNext.disabled = timelineViewport.scrollLeft >= maxScroll - 4;
 
-                const viewportCenter = timelineViewport.getBoundingClientRect().left + timelineViewport.clientWidth / 2;
-                let closestItem = null;
-                let closestDistance = Infinity;
-
-                timelineItems.forEach((item) => {
-                    const itemRect = item.getBoundingClientRect();
-                    const distance = Math.abs(itemRect.left + itemRect.width / 2 - viewportCenter);
-                    if (distance < closestDistance) {
-                        closestDistance = distance;
-                        closestItem = item;
+                if (maxScroll > 4) {
+                    if (timelineViewport.scrollLeft <= 4) {
+                        setActiveTimelineItem(timelineItems[0]);
+                        return;
                     }
-                });
 
+                    const viewportLeft = timelineViewport.getBoundingClientRect().left;
+                    let closestItem = timelineItems[0];
+                    let closestDistance = Infinity;
+
+                    timelineItems.forEach((item) => {
+                        const itemRect = item.getBoundingClientRect();
+                        const distance = Math.abs(itemRect.left - viewportLeft);
+                        if (distance < closestDistance) {
+                            closestDistance = distance;
+                            closestItem = item;
+                        }
+                    });
+
+                    setActiveTimelineItem(closestItem);
+                }
+            };
+
+            const setActiveTimelineItem = (activeItem) => {
+                const activeIndex = timelineItems.indexOf(activeItem);
                 timelineItems.forEach((item) => {
-                    item.classList.toggle('is-active', item === closestItem);
+                    item.classList.toggle('is-active', item === activeItem);
                 });
+                timelineTrack.style.setProperty('--timeline-progress', `${activeIndex / (timelineItems.length - 1) * 100}%`);
+            };
+
+            const scrollTimelineTo = (item) => {
+                const maxScroll = Math.max(0, timelineViewport.scrollWidth - timelineViewport.clientWidth);
+                timelineViewport.scrollLeft = Math.min(maxScroll, Math.max(0, item.offsetLeft));
+                updateTimelineState();
             };
 
             const scheduleTimelineUpdate = () => {
@@ -1832,10 +1898,12 @@
             };
 
             const scrollTimelineBy = (direction) => {
-                timelineViewport.scrollBy({
-                    left: direction * timelineViewport.clientWidth * 0.82,
-                    behavior: 'smooth'
-                });
+                const maxScroll = Math.max(0, timelineViewport.scrollWidth - timelineViewport.clientWidth);
+                const itemStep = timelineItems.length > 1
+                    ? timelineItems[1].offsetLeft - timelineItems[0].offsetLeft
+                    : timelineViewport.clientWidth;
+                timelineViewport.scrollLeft = Math.min(maxScroll, Math.max(0, timelineViewport.scrollLeft + direction * itemStep));
+                updateTimelineState();
             };
 
             timelinePrev.addEventListener('click', () => scrollTimelineBy(-1));
@@ -1890,15 +1958,19 @@
             timelineViewport.querySelectorAll('[data-timeline-node]').forEach((node, index) => {
                 node.addEventListener('click', () => {
                     const item = timelineItems[index];
-                    const viewportLeft = timelineViewport.getBoundingClientRect().left;
-                    const itemLeft = item.getBoundingClientRect().left;
-                    timelineViewport.scrollTo({
-                        left: timelineViewport.scrollLeft + itemLeft - viewportLeft,
-                        behavior: 'smooth'
-                    });
+                    if (timelineViewport.scrollWidth > timelineViewport.clientWidth + 4) {
+                        scrollTimelineTo(item);
+                    }
+                    setActiveTimelineItem(item);
                 });
             });
 
+            timelineItems.forEach((item) => {
+                item.addEventListener('pointerenter', () => setActiveTimelineItem(item));
+                item.addEventListener('focusin', () => setActiveTimelineItem(item));
+            });
+
+            setActiveTimelineItem(timelineItems[0]);
             updateTimelineState();
         }
 
