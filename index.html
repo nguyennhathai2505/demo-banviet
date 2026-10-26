@@ -277,7 +277,7 @@
         }
         .brand-orb {
             position: absolute;
-            z-index: 2;
+            z-index: 3;
             top: 50%;
             left: 50%;
             width: 36%;
@@ -301,6 +301,45 @@
             text-align: center;
             transform: translate(-50%, -50%);
             animation: hero-core-enter 900ms 180ms cubic-bezier(0.2, 1.35, 0.45, 1) both;
+            transition: scale 450ms cubic-bezier(0.2, 0.8, 0.25, 1), box-shadow 450ms ease;
+        }
+        .brand-orb-ripple {
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            left: 50%;
+            width: 36%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        }
+        .brand-orb-ripple::before,
+        .brand-orb-ripple::after {
+            position: absolute;
+            inset: 0;
+            border: 2px solid rgba(141, 216, 255, 0.76);
+            border-radius: 50%;
+            box-shadow: 0 0 18px rgba(92, 180, 227, 0.48), inset 0 0 14px rgba(92, 180, 227, 0.18);
+            content: "";
+            opacity: 0;
+            animation: brand-orb-ripple 4.2s ease-out infinite;
+        }
+        .brand-orb-ripple::after {
+            border-color: rgba(255, 224, 135, 0.68);
+            animation-delay: 2.1s;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .brand-orb:hover {
+                scale: 1.08;
+                box-shadow:
+                    0 0 0 5px rgba(255, 255, 255, 0.96),
+                    0 18px 44px rgba(0, 15, 37, 0.5),
+                    0 0 28px rgba(92, 180, 227, 0.75),
+                    0 0 58px rgba(255, 215, 0, 0.42),
+                    inset 0 9px 26px rgba(197, 224, 255, 0.22),
+                    inset 0 -22px 38px rgba(0, 12, 37, 0.36);
+            }
         }
         .brand-orb::before {
             position: absolute;
@@ -390,6 +429,19 @@
         }
         .brand-orb__vision p {
             margin: 0;
+        }
+        @keyframes brand-orb-ripple {
+            0% {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            12% {
+                opacity: 0.52;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(3.15);
+            }
         }
         .ecosystem-wing {
             transform-box: view-box;
@@ -510,6 +562,8 @@
             .ecosystem-hero::before,
             .ecosystem-hero__eyebrow,
             .brand-orb,
+            .brand-orb-ripple::before,
+            .brand-orb-ripple::after,
             .ecosystem-wing,
             .ecosystem-sector {
                 animation: none;
@@ -520,6 +574,13 @@
             }
             .brand-orb {
                 transform: translate(-50%, -50%);
+            }
+            .brand-orb-ripple::before,
+            .brand-orb-ripple::after {
+                animation: none;
+            }
+            .brand-orb:hover {
+                scale: 1;
             }
             .ecosystem-hero::before {
                 transform: none;
@@ -1021,6 +1082,7 @@
                 CON NGƯỜI
             </div>
 
+            <div class="brand-orb-ripple" aria-hidden="true"></div>
             <div class="brand-orb">
                 <svg class="brand-orb__globe" viewBox="0 0 300 300" aria-hidden="true">
                     <defs>
